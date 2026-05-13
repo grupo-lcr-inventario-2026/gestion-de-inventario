@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de Stock</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <h1>Sistema de Gestion de Inventario</h1>
+    <table border="1">
+    
+    <h2>Productos en Existencia</h2>
+
+<!--===================================================================================================================================-->
+
+<thead> <!--Cabeza de Tabla-->
+
+    <tr>
+        <th>ID</th>
+        <th>Productos</th>
+        <th>Cantidad</th>
+        <th>Accion</th>
+    </tr>
+    </thead>
+
+
+    <tbody> <!--Cuerpo de tabla-->
+    <tr>
+        <td>001</td>
+        <td>Producto1</td>
+        <td>58</td>
+        <td><button onclick="seleccionarProducto('001', 'Producto1', 58)">Seleccionar</button></td>
+    </tr>
+
+
+    <tr>
+        <td>002</td>
+        <td>Producto2</td>
+        <td>56</td>
+        <td><button onclick="seleccionarProducto('002', 'Producto2', 56)">Seleccionar</button></td>
+    </tr>
+
+
+    <tr>
+        <td>003</td>
+        <td>Producto3</td>
+        <td>47</td>
+        <td><button onclick="seleccionarProducto('003', 'Producto3', 47)">Seleccionar</button></td>
+    </tr>
+    
+    </tbody>
+</table>
+
+<!--===================================================================================================================================-->
+
+<h2>Actualizar Stock</h2>
+
+        <form id="stockForm">
+            <label for="productoNombre">Producto Seleccionado:</label>
+            <input type="text" id="productoNombre" readonly>
+            
+            <br><br>
+
+            <label for="cantidad">Modificar Cantidad Disponible:</label>
+            <input type="number" id="cantidad" placeholder="Ej: 21" required>
+
+            <br><br>
+
+<!--===================================================================================================================================-->
+           
+<button type="submit">Guardar Cambios</button>
+        </form>
+
+<!--===================================================================================================================================-->
+
+<div id="mensaje-feedback" style="margin-top: 20px; font-weight: bold;"></div>
+
+<!--===================================================================================================================================-->
+
+</body>
+</html>
