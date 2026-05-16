@@ -1,101 +1,61 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../frontend/css/global.css">
     <title>Quiénes Somos - Gestión de Inventario</title>
 </head>
-
 <body>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li>
+                    <li><a href="stock.html" class="nav__link">Stock</a></li>
+                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
+                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
+                    <li class="nav__item--login"><a href="login.html" class="nav__link">Login</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <header>
-        <h1>Sistema de Gestión de Inventario</h1>
+        <main class="main">
+            <section class="card">
+                <h2 class="card__title">Quiénes Somos</h2>
+                <p class="card__text">Somos el Grupo LCR, encargado del desarrollo del proyecto Sistema de Gestión de Inventario para la materia Full Stack I.</p>
+                <p class="card__text">Este sistema fue creado con el objetivo de mejorar la organización, administración y control del stock de productos dentro de una empresa.</p>
+            </section>
 
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Stock</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Quiénes Somos</a></li>
-            </ul>
-        </nav>
-    </header>
+            <section class="card">
+                <h2 class="card__title">Objetivo del Sistema</h2>
+                <p class="card__text">El sistema permite registrar productos, controlar entradas y salidas de stock y mantener la información actualizada para facilitar la toma de decisiones y reducir errores en la gestión de inventario.</p>
+            </section>
 
-    <main>
+            <section class="card">
+                <h2 class="card__title">Integrantes del Grupo</h2>
+                <ul class="list">
+                    <li class="list__item">Facundo Rodríguez</li>
+                    <li class="list__item">Matias Rodriguez</li>
+                    <li class="list__item">Julia Lanfranco</li>
+                    <li class="list__item">Carolina Lanfranco</li>
+                    <li class="list__item">Diego Cordoba</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>Quiénes Somos</h2>
+            <section class="card">
+                <h2 class="card__title">Información del Proyecto</h2>
+                <p class="card__text">Proyecto académico desarrollado para practicar conceptos de desarrollo web y gestión de sistemas de inventario.</p>
+                <p class="card__text">El sistema busca ofrecer una interfaz simple y organizada para la administración de productos y control de stock.</p>
+            </section>
+        </main>
 
-            <p>
-                Somos el Grupo LCR, encargado del desarrollo del proyecto
-                Sistema de Gestión de Inventario para la materia Full Stack I.
-            </p>
-
-            <p>
-                Este sistema fue creado con el objetivo de mejorar la organización,
-                administración y control del stock de productos dentro de una empresa.
-            </p>
-        </section>
-
-        <section>
-            <h2>Objetivo del Sistema</h2>
-
-            <p>
-                El sistema permite registrar productos, controlar entradas y salidas
-                de stock y mantener la información actualizada para facilitar la toma
-                de decisiones y reducir errores en la gestión de inventario.
-            </p>
-        </section>
-
-        <section>
-            <h2>Integrantes del Grupo</h2>
-
-            <article>
-                <h3>Facundo Rodríguez</h3>
-            </article>
-
-            <article>
-                <h3>Matias Rodriguez</h3>  
-            </article>
-
-            <article>
-                <h3>Julia Lanfranco </h3>
-            </article>
-
-            <article>
-                <h3>Carolina Lanfranco </h3>
-            </article>
-
-            <article>
-                <h3>Diego Cordoba </h3>
-            </article>
-        </section>
-
-        
-        <section>
-            <h2>Información del Proyecto</h2>
-
-            <p>
-                Proyecto académico desarrollado para practicar conceptos de
-                desarrollo web y gestión de sistemas de inventario.
-            </p>
-
-            <p>
-                El sistema busca ofrecer una interfaz simple y organizada para
-                la administración de productos y control de stock.
-            </p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Proyecto Gestión de Inventario - Full Stack I - 2026</p>
-        <p>Grupo LCR</p>
-    </footer>
-
+        <footer class="footer">
+            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
+            <p class="footer__text">Grupo LCR</p>
+        </footer>
+    </div>
 </body>
-
 </html>

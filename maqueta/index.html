@@ -1,56 +1,49 @@
 <!DOCTYPE html>
-
 <html lang="es">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Inventario</title>
-    </head>
-
+    <link rel="stylesheet" href="../frontend/css/global.css">
+    <title>Inicio - Gestión de Inventario</title>
+</head>
 <body>
-    <header>
-        <h1>Sistema de Gestión de Inventario</h1>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <!-- <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li> -->
+                    <li><a href="stock.html" class="nav__link">Stock</a></li>
+                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
+                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
+                    <li class="nav__item--login"><a href="login.html" class="nav__link">Login</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Stock</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Quiénes Somos</a></li>
-                
-            </ul>
-        </nav>
-    </header>
+        <main class="main">
+            <section class="card">
+                <h2 class="card__title">Bienvenido al Sistema de Gestión de Inventario</h2>
+                <p class="card__text">Este sistema permite administrar y controlar de manera eficiente los productos y recursos de una organización. Facilita el registro de entradas y salidas de stock, manteniendo la información siempre actualizada.</p>
+                <p class="card__text">Su objetivo es mejorar la organización interna, reducir errores en el manejo de inventario y optimizar la toma de decisiones. Accedé al sistema según tu rol para gestionar la información disponible.</p>
+            </section>
 
-    <section>
-        <h2>Bienvenido al Sistema de Gestión de Inventario</h2>
-        <p>Este sistema permite administrar y controlar de manera eficiente los productos y recursos de una organización.
-            Facilita el registro de entradas y salidas de stock, manteniendo la información siempre actualizada.
-        </p>
-        <p>Su objetivo es mejorar la organización interna, reducir errores en el manejo de inventario y optimizar la toma de decisiones.
-            Accedé al sistema según tu rol para gestionar la información disponible.
-        </p>
-    </section>
+            <section class="card">
+                <h2 class="card__title">Funcionalidades del Sistema</h2>
+                <ul class="list">
+                    <li class="list__item">Registro y control de productos</li>
+                    <li class="list__item">Gestión de stock (entradas y salidas)</li>
+                    <li class="list__item">Administración de usuarios con roles</li>
+                    <li class="list__item">Visualización de inventario actualizado</li>
+                </ul>
+            </section>
+        </main>
 
-    <section>
-        <h2>Funcionalidades del Sistema</h2>
-        <ul>
-            <li>Registro y control de productos</li>
-            <li>Gestión de stock (entradas y salidas)</li>
-            <li>Administración de usuarios con roles</li>
-            <li>Visualización de inventario actualizado</li> 
-        </ul>
-
-    </section>
-
-    <footer>
-        <p>Proyecto Gestión de Inventario - Full Stack I - 2026</p>
-        <p>Grupo LCR</p>
-
-    </footer>
-    
-    </body>
-
+        <footer class="footer">
+            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
+            <p class="footer__text">Grupo LCR</p>
+        </footer>
+    </div>
+</body>
 </html>
