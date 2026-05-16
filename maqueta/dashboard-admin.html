@@ -1,138 +1,147 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="styles.css" />
-<title>Dashboard Admin - Gestión de Productos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../frontend/css/global.css">
+    <title>Dashboard Admin - Gestión de Productos</title>
 </head>
 <body>
-<aside class="container">
-    <h1>Inventory Admin</h1>
-    <nav>
-    <ul>
-        <li>Dashboard</li>
-        <li>Gestión de Productos</li>
-        <li>Inventario</li>
-        <li>Proveedores</li>
-        <li>Reportes</li>
-    </ul>
-    </nav>
-</aside>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li>
+                    <li><a href="stock.html" class="nav__link">Stock</a></li>
+                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
+                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
+                    <li class="nav__item--login"><a href="login.html" class="nav__link">Login</a></li>
+                </ul>
+            </nav>
+        </header>
 
-<main>
-    <header>
-    <h1>Gestión de Productos</h1>
-    <p>Panel administrativo simple para administrar productos del sistema.</p>
+        <main class="main">
+            <section class="card">
+                <h2 class="card__title">Gestión de Productos</h2>
+                <p class="card__text">Panel administrativo para administrar productos del sistema.</p>
+                <div style="margin: 1rem 0; display: flex; gap: 0.75rem;">
+                    <input type="text" placeholder="Buscar producto..." style="flex: 1; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
+                    <button type="button" class="nav__link">Agregar producto</button>
+                </div>
+            </section>
 
-    <input type="text" placeholder="Buscar producto..." />
-    <button type="button">Agregar producto</button>
-    </header>
+            <section class="card">
+                <h2 class="card__title">Resumen del Sistema</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <article>
+                        <h3>Total de productos</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">128</p>
+                    </article>
+                    <article>
+                        <h3>Productos con stock bajo</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: #e67e22;">14</p>
+                    </article>
+                    <article>
+                        <h3>Productos disponibles</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: #27ae60;">97</p>
+                    </article>
+                    <article>
+                        <h3>Productos agotados</h3>
+                        <p style="font-size: 1.5rem; font-weight: bold; color: #e74c3c;">17</p>
+                    </article>
+                </div>
+            </section>
 
-    <section>
-    <article>
-        <h2>Total de productos</h2>
-        <p>128</p>
-    </article>
+            <section class="card">
+                <h2 class="card__title">Tabla de productos</h2>
+                <table border="1" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cuaderno A4</td>
+                            <td>Útiles</td>
+                            <td>45</td>
+                            <td>Disponible</td>
+                            <td>
+                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
+                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lapicera Azul</td>
+                            <td>Escritura</td>
+                            <td>8</td>
+                            <td>Stock bajo</td>
+                            <td>
+                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
+                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Carpeta Plástica</td>
+                            <td>Archivado</td>
+                            <td>0</td>
+                            <td>Agotado</td>
+                            <td>
+                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
+                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-    <article>
-        <h2>Productos con stock bajo</h2>
-        <p>14</p>
-    </article>
+            <section class="card">
+                <h2 class="card__title">Agregar/Editar Producto</h2>
+                <form style="display: grid; gap: 1rem;">
+                    <div>
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" type="text" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
+                    </div>
 
-    <article>
-        <h2>Productos disponibles</h2>
-        <p>97</p>
-    </article>
+                    <div>
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                            <option>Seleccionar categoría</option>
+                            <option>Útiles</option>
+                            <option>Escritura</option>
+                            <option>Archivado</option>
+                            <option>Accesorios</option>
+                        </select>
+                    </div>
 
-    <article>
-        <h2>Productos agotados</h2>
-        <p>17</p>
-    </article>
-    </section>
+                    <div>
+                        <label for="precio">Precio</label>
+                        <input id="precio" type="number" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
+                    </div>
 
-    <section>
-    <h2>Tabla de productos</h2>
+                    <div>
+                        <label for="stock">Stock</label>
+                        <input id="stock" type="number" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
+                    </div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Producto</th>
-            <th>Categoría</th>
-            <th>Stock</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Cuaderno A4</td>
-            <td>Útiles</td>
-            <td>45</td>
-            <td>Disponible</td>
-            <td>
-            <button type="button">Editar</button>
-            <button type="button">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Lapicera Azul</td>
-            <td>Escritura</td>
-            <td>8</td>
-            <td>Stock bajo</td>
-            <td>
-            <button type="button">Editar</button>
-            <button type="button">Eliminar</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Carpeta Plástica</td>
-            <td>Archivado</td>
-            <td>0</td>
-            <td>Agotado</td>
-            <td>
-            <button type="button">Editar</button>
-            <button type="button">Eliminar</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    </section>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="button" class="nav__link">Guardar</button>
+                        <button type="button" style="background: var(--muted); padding: 0.5rem 0.9rem; border-radius: var(--radius); text-decoration: none; color: white; border: none; cursor: pointer;">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+        </main>
 
-    <section>
-    <h2>Formulario visual</h2>
-
-    <form>
-        <div>
-        <label for="nombre">Nombre</label>
-        <input id="nombre" type="text" />
-        </div>
-
-        <div>
-        <label for="categoria">Categoría</label>
-        <select id="categoria">
-            <option>Seleccionar categoría</option>
-            <option>Útiles</option>
-            <option>Escritura</option>
-            <option>Archivado</option>
-            <option>Accesorios</option>
-        </select>
-        </div>
-
-        <div>
-        <label for="precio">Precio</label>
-        <input id="precio" type="number" />
-        </div>
-
-        <div>
-        <label for="stock">Stock</label>
-        <input id="stock" type="number" />
-        </div>
-
-        <button type="button">Guardar</button>
-        <button type="button">Cancelar</button>
-    </form>
-    </section>
-</main>
+        <footer class="footer">
+            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
+            <p class="footer__text">Grupo LCR</p>
+        </footer>
+    </div>
 </body>
 </html>

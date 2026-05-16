@@ -1,82 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion de Stock</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../frontend/css/global.css">
+    <title>Gestión de Stock - Gestión de Inventario</title>
 </head>
 <body>
-    <h1>Sistema de Gestion de Inventario</h1>
-    <table border="1">
-    
-    <h2>Productos en Existencia</h2>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li>
+                    <li><a href="stock.html" class="nav__link">Stock</a></li>
+                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
+                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
+                    <li class="nav__item--login"><a href="login.html" class="nav__link">Login</a></li>
+                </ul>
+            </nav>
+        </header>
 
-<!--===================================================================================================================================-->
+        <main class="main">
+            <section class="card">
+                <h2 class="card__title">Productos en Existencia</h2>
+                <table border="1" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Productos</th>
+                            <th>Cantidad</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Producto1</td>
+                            <td>58</td>
+                            <td><button class="btn-select">Seleccionar</button></td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Producto2</td>
+                            <td>56</td>
+                            <td><button class="btn-select">Seleccionar</button></td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Producto3</td>
+                            <td>47</td>
+                            <td><button class="btn-select">Seleccionar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-<thead> <!--Cabeza de Tabla-->
+            <section class="card">
+                <h2 class="card__title">Actualizar Stock</h2>
+                <form id="stockForm">
+                    <div>
+                        <label for="productoNombre">Producto Seleccionado:</label>
+                        <input type="text" id="productoNombre" readonly>
+                    </div>
 
-    <tr>
-        <th>ID</th>
-        <th>Productos</th>
-        <th>Cantidad</th>
-        <th>Accion</th>
-    </tr>
-    </thead>
+                    <br><br>
 
+                    <div>
+                        <label for="cantidad">Modificar Cantidad Disponible:</label>
+                        <input type="number" id="cantidad" placeholder="Ej: 21" required>
+                    </div>
 
-    <tbody> <!--Cuerpo de tabla-->
-    <tr>
-        <td>001</td>
-        <td>Producto1</td>
-        <td>58</td>
-        <td><button onclick="seleccionarProducto('001', 'Producto1', 58)">Seleccionar</button></td>
-    </tr>
+                    <br><br>
 
+                    <button type="submit" class="nav__link">Guardar Cambios</button>
+                </form>
 
-    <tr>
-        <td>002</td>
-        <td>Producto2</td>
-        <td>56</td>
-        <td><button onclick="seleccionarProducto('002', 'Producto2', 56)">Seleccionar</button></td>
-    </tr>
+                <div id="mensaje-feedback" style="margin-top: 20px; font-weight: bold;"></div>
+            </section>
+        </main>
 
-
-    <tr>
-        <td>003</td>
-        <td>Producto3</td>
-        <td>47</td>
-        <td><button onclick="seleccionarProducto('003', 'Producto3', 47)">Seleccionar</button></td>
-    </tr>
-    
-    </tbody>
-</table>
-
-<!--===================================================================================================================================-->
-
-<h2>Actualizar Stock</h2>
-
-        <form id="stockForm">
-            <label for="productoNombre">Producto Seleccionado:</label>
-            <input type="text" id="productoNombre" readonly>
-            
-            <br><br>
-
-            <label for="cantidad">Modificar Cantidad Disponible:</label>
-            <input type="number" id="cantidad" placeholder="Ej: 21" required>
-
-            <br><br>
-
-<!--===================================================================================================================================-->
-           
-<button type="submit">Guardar Cambios</button>
-        </form>
-
-<!--===================================================================================================================================-->
-
-<div id="mensaje-feedback" style="margin-top: 20px; font-weight: bold;"></div>
-
-<!--===================================================================================================================================-->
-
+        <footer class="footer">
+            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
+            <p class="footer__text">Grupo LCR</p>
+        </footer>
+    </div>
 </body>
 </html>

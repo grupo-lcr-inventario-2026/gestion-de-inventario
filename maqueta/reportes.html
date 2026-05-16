@@ -1,124 +1,96 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../frontend/css/global.css">
     <title>Reportes - Gestión de Inventario</title>
-   
 </head>
-
 <body>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Inicio</a></li>
+                    <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li>
+                    <li><a href="stock.html" class="nav__link">Stock</a></li>
+                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
+                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
+                    <li class="nav__item--login"><a href="login.html" class="nav__link">Login</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <header>
-        <h1 >Sistema de Gestión de Inventario</h1>
+        <main class="main">
+            <section class="card">
+                <h2 class="card__title">Panel de Reportes</h2>
+                <p class="card__text">En esta sección se visualizan los reportes generales del sistema de inventario y el estado actual del stock disponible.</p>
+            </section>
 
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Stock</a></li>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Quiénes Somos</a></li>
-            </ul>
-        </nav>
-    </header>
+            <section class="card">
+                <h2 class="card__title">Estadísticas Generales</h2>
+                <ul class="list">
+                    <li class="list__item"><strong>Productos Registrados:</strong> 125 productos</li>
+                    <li class="list__item"><strong>Productos con Bajo Stock:</strong> 8 productos</li>
+                    <li class="list__item"><strong>Stock Disponible:</strong> 3.450 unidades</li>
+                </ul>
+            </section>
 
-    <main>
+            <section class="card">
+                <h2 class="card__title">Tabla de Reportes</h2>
+                <table border="1" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Notebook HP</td>
+                            <td>Tecnología</td>
+                            <td>15</td>
+                            <td>Disponible</td>
+                        </tr>
+                        <tr>
+                            <td>Mouse Logitech</td>
+                            <td>Accesorios</td>
+                            <td>4</td>
+                            <td>Bajo Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Teclado Redragon</td>
+                            <td>Accesorios</td>
+                            <td>0</td>
+                            <td>Sin Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Monitor Samsung</td>
+                            <td>Pantallas</td>
+                            <td>9</td>
+                            <td>Disponible</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-        <section>
-            <h2>Panel de Reportes</h2>
+            <section class="card">
+                <h2 class="card__title">Alertas del Sistema</h2>
+                <ul class="list">
+                    <li class="list__item">⚠ Hay productos con bajo stock.</li>
+                    <li class="list__item">❌ Existen productos sin stock disponible.</li>
+                    <li class="list__item">✅ El sistema funciona correctamente.</li>
+                </ul>
+            </section>
+        </main>
 
-            <p>
-                En esta sección se visualizan los reportes generales del sistema
-                de inventario y el estado actual del stock disponible.
-            </p>
-        </section>
-
-        <section>
-            <h2>Estadísticas Generales</h2>
-
-            <article>
-                <h3>Productos Registrados</h3>
-                <p>125 productos</p>
-            </article>
-
-            <article>
-                <h3>Productos con Bajo Stock</h3>
-                <p>8 productos</p>
-            </article>
-
-            <article>
-                <h3>Stock Disponible</h3>
-                <p>3.450 unidades</p>
-            </article>
-        </section>
-
-        <section>
-            <h2>Tabla de Reportes</h2>
-
-            <table border="1">
-
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Categoría</th>
-                        <th>Stock</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>Notebook HP</td>
-                        <td>Tecnología</td>
-                        <td>15</td>
-                        <td>Disponible</td>
-                    </tr>
-
-                    <tr>
-                        <td>Mouse Logitech</td>
-                        <td>Accesorios</td>
-                        <td>4</td>
-                        <td>Bajo Stock</td>
-                    </tr>
-
-                    <tr>
-                        <td>Teclado Redragon</td>
-                        <td>Accesorios</td>
-                        <td>0</td>
-                        <td>Sin Stock</td>
-                    </tr>
-
-                    <tr>
-                        <td>Monitor Samsung</td>
-                        <td>Pantallas</td>
-                        <td>9</td>
-                        <td>Disponible</td>
-                    </tr>
-                </tbody>
-
-            </table>
-        </section>
-
-        <section>
-            <h2>Alertas del Sistema</h2>
-
-            <p>⚠ Hay productos con bajo stock.</p>
-
-            <p>❌ Existen productos sin stock disponible.</p>
-
-            <p>✅ El sistema funciona correctamente.</p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Proyecto Gestión de Inventario - Full Stack I - 2026</p>
-        <p>Grupo LCR</p>
-    </footer>
-
+        <footer class="footer">
+            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
+            <p class="footer__text">Grupo LCR</p>
+        </footer>
+    </div>
 </body>
-
 </html>
