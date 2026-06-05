@@ -24,65 +24,79 @@
         </header>
 
         <main class="main">
-            <section class="card">
-                <h2 class="card__title">Productos en Existencia</h2>
-                <table border="1" style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Productos</th>
-                            <th>Cantidad</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>001</td>
-                            <td>Producto1</td>
-                            <td>58</td>
-                            <td><button class="btn-select">Seleccionar</button></td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>Producto2</td>
-                            <td>56</td>
-                            <td><button class="btn-select">Seleccionar</button></td>
-                        </tr>
-                        <tr>
-                            <td>003</td>
-                            <td>Producto3</td>
-                            <td>47</td>
-                            <td><button class="btn-select">Seleccionar</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+    <section class="card">
+        <h2 class="card__title">Productos en Existencia</h2>
 
-            <section class="card">
-                <h2 class="card__title">Actualizar Stock</h2>
-                <form id="stockForm">
-                    <div>
-                        <label for="productoNombre">Producto Seleccionado:</label>
-                        <input type="text" id="productoNombre" readonly>
-                    </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Productos</th>
+                    <th>Cantidad</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>Producto1</td>
+                    <td>58</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">
+                            Seleccionar
+                        </button>
+                    </td>
+                </tr>
 
-                    <br><br>
+                <tr>
+                    <td>002</td>
+                    <td>Producto2</td>
+                    <td>56</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">
+                            Seleccionar
+                        </button>
+                    </td>
+                </tr>
 
-                    <div>
-                        <label for="cantidad">Modificar Cantidad Disponible:</label>
-                        <input type="number" id="cantidad" placeholder="Ej: 21" required>
-                    </div>
+                <tr>
+                    <td>003</td>
+                    <td>Producto3</td>
+                    <td>47</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">
+                            Seleccionar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
-                    <br><br>
+    <section class="card">
+        <h2 class="card__title">Actualizar Stock</h2>
 
-                    <button type="submit" class="nav__link">Guardar Cambios</button>
-                </form>
+        <form id="stockForm">
+            <div class="mb-3">
+                <label for="productoNombre">Producto Seleccionado:</label>
+                <input type="text" id="productoNombre" class="form-control" readonly>
+            </div>
 
-                <div id="mensaje-feedback" style="margin-top: 20px; font-weight: bold;"></div>
-            </section>
-        </main>
+            <div class="mb-3">
+                <label for="cantidad">Modificar Cantidad Disponible:</label>
+                <input type="number" id="cantidad" class="form-control" placeholder="Ej: 21" required>
+            </div>
 
-        <footer class="footer">
+            <button type="submit" class="btn btn-primary">
+                Guardar Cambios
+            </button>
+        </form>
+
+        <div id="mensaje-feedback" class="mt-3 fw-bold"></div>
+    </section>
+    
+</main>
+<footer class="footer">
             <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
             <p class="footer__text">Grupo LCR</p>
         </footer>
