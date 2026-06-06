@@ -57,49 +57,51 @@
 
             <section class="card">
                 <h2 class="card__title">Tabla de productos</h2>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Categoría</th>
-                            <th>Stock</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Cuaderno A4</td>
-                            <td>Útiles</td>
-                            <td>45</td>
-                            <td>Disponible</td>
-                            <td>
-                                <button type="button" class="btn btn-secondary">Editar</button>
-                                <button type="button" class="btn btn-danger">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lapicera Azul</td>
-                            <td>Escritura</td>
-                            <td>8</td>
-                            <td>Stock bajo</td>
-                            <td>
-                                <button type="button" class="btn btn-secondary">Editar</button>
-                                <button type="button" class="btn btn-danger">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Carpeta Plástica</td>
-                            <td>Archivado</td>
-                            <td>0</td>
-                            <td>Agotado</td>
-                            <td>
-                                <button type="button" class="btn btn-secondary">Editar</button>
-                                <button type="button" class="btn btn-danger">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Stock</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cuaderno A4</td>
+                                <td>Útiles</td>
+                                <td>45</td>
+                                <td>Disponible</td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary">Editar</button>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lapicera Azul</td>
+                                <td>Escritura</td>
+                                <td>8</td>
+                                <td>Stock bajo</td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary">Editar</button>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carpeta Plástica</td>
+                                <td>Archivado</td>
+                                <td>0</td>
+                                <td>Agotado</td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary">Editar</button>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
             <section class="card">
@@ -108,7 +110,7 @@
                     <div>
                         <label for="nombre">Nombre</label>
                         <input id="nombre" type="text" class="form-control" />
-
+                    </div>
                     <div>
                         <label for="categoria">Categoría</label>
                        <select id="categoria" class="form-select">
