@@ -27,37 +27,37 @@
             <section class="card">
                 <h2 class="card__title">Gestión de Productos</h2>
                 <p class="card__text">Panel administrativo para administrar productos del sistema.</p>
-                <div style="margin: 1rem 0; display: flex; gap: 0.75rem;">
-                    <input type="text" placeholder="Buscar producto..." style="flex: 1; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
-                    <button type="button" class="nav__link">Agregar producto</button>
+                <div class="d-flex gap-3 my-3">
+                    <input type="text" placeholder="Buscar producto..." class="form-control" />
+                    <button type="button" class="btn btn-primary">Agregar producto</button>
                 </div>
             </section>
 
             <section class="card">
                 <h2 class="card__title">Resumen del Sistema</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <article>
+                <div class="row row-cols-1 row-cols-md-4 g-3">
+                    <article class="col">
                         <h3>Total de productos</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">128</p>
+                        <p class="fs-4 fw-bold text-primary">128</p>
                     </article>
-                    <article>
+                    <article class="col">
                         <h3>Productos con stock bajo</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: #e67e22;">14</p>
+                        <p class="fs-4 fw-bold text-warning">14</p>
                     </article>
-                    <article>
+                    <article class="col">
                         <h3>Productos disponibles</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: #27ae60;">97</p>
+                        <p class="fs-4 fw-bold text-success">97</p>
                     </article>
-                    <article>
+                    <article class="col">
                         <h3>Productos agotados</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: #e74c3c;">17</p>
+                        <p class="fs-4 fw-bold text-danger">17</p>
                     </article>
                 </div>
             </section>
 
             <section class="card">
                 <h2 class="card__title">Tabla de productos</h2>
-                <table border="1" style="width: 100%; border-collapse: collapse;">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -74,8 +74,8 @@
                             <td>45</td>
                             <td>Disponible</td>
                             <td>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                                <button type="button" class="btn btn-secondary">Editar</button>
+                                <button type="button" class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
                         <tr>
@@ -84,8 +84,8 @@
                             <td>8</td>
                             <td>Stock bajo</td>
                             <td>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                                <button type="button" class="btn btn-secondary">Editar</button>
+                                <button type="button" class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
                         <tr>
@@ -94,8 +94,8 @@
                             <td>0</td>
                             <td>Agotado</td>
                             <td>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                                <button type="button" class="btn btn-secondary">Editar</button>
+                                <button type="button" class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
@@ -104,15 +104,14 @@
 
             <section class="card">
                 <h2 class="card__title">Agregar/Editar Producto</h2>
-                <form style="display: grid; gap: 1rem;">
+                <form>
                     <div>
                         <label for="nombre">Nombre</label>
-                        <input id="nombre" type="text" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
-                    </div>
+                        <input id="nombre" type="text" class="form-control" />
 
                     <div>
                         <label for="categoria">Categoría</label>
-                        <select id="categoria" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
+                       <select id="categoria" class="form-select">
                             <option>Seleccionar categoría</option>
                             <option>Útiles</option>
                             <option>Escritura</option>
@@ -123,17 +122,17 @@
 
                     <div>
                         <label for="precio">Precio</label>
-                        <input id="precio" type="number" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
+                        <input id="precio" type="text" class="form-control" />
                     </div>
 
                     <div>
                         <label for="stock">Stock</label>
-                        <input id="stock" type="number" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
+                        <input id="stock" type="number" class="form-control" />
                     </div>
 
-                    <div style="display: flex; gap: 1rem;">
-                        <button type="button" class="nav__link">Guardar</button>
-                        <button type="button" style="background: var(--muted); padding: 0.5rem 0.9rem; border-radius: var(--radius); text-decoration: none; color: white; border: none; cursor: pointer;">Cancelar</button>
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary">Cancelar</button>
                     </div>
                 </form>
             </section>
