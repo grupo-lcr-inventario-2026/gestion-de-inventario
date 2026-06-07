@@ -3,60 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../frontend/css/global.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
     <title>Dashboard Admin - Gestión de Productos</title>
+
+    <style>
+        .btn-logout {
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+        }
+
+        .btn-logout:hover {
+            background-color: #f1b0b7;
+            color: #842029;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="page">
-        <header class="header">
-            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li><a href="index.html" class="nav__link">Inicio</a></li>
-                    <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li>
-                    <li><a href="stock.html" class="nav__link">Stock</a></li>
-                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
-                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
-                    <li class="nav__item--login"><a href="login.html" class="nav__link">Login</a></li>
+
+<div class="page">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light custom-navbar px-3">
+
+            <h1 class="header__title">
+                Sistema de Gestión de Inventario
+            </h1>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menuNav"
+                aria-controls="menuNav"
+                aria-expanded="false"
+                aria-label="Menú">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="index.html">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="dashboard-admin.html">Productos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="stock.html">Stock</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="reportes.html">Reportes</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="quienes-somos.html">Quiénes Somos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-logout" href="login.html">
+                            Cerrar sesión
+                        </a>
+                    </li>
+
                 </ul>
-            </nav>
-        </header>
 
-        <main class="main">
-            <section class="card">
-                <h2 class="card__title">Gestión de Productos</h2>
-                <p class="card__text">Panel administrativo para administrar productos del sistema.</p>
-                <div style="margin: 1rem 0; display: flex; gap: 0.75rem;">
-                    <input type="text" placeholder="Buscar producto..." style="flex: 1; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
-                    <button type="button" class="nav__link">Agregar producto</button>
-                </div>
-            </section>
+            </div>
+        </nav>
+    </header>
 
-            <section class="card">
-                <h2 class="card__title">Resumen del Sistema</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <article>
-                        <h3>Total de productos</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">128</p>
-                    </article>
-                    <article>
-                        <h3>Productos con stock bajo</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: #e67e22;">14</p>
-                    </article>
-                    <article>
-                        <h3>Productos disponibles</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: #27ae60;">97</p>
-                    </article>
-                    <article>
-                        <h3>Productos agotados</h3>
-                        <p style="font-size: 1.5rem; font-weight: bold; color: #e74c3c;">17</p>
-                    </article>
-                </div>
-            </section>
+    <main class="main">
 
-            <section class="card">
-                <h2 class="card__title">Tabla de productos</h2>
-                <table border="1" style="width: 100%; border-collapse: collapse;">
+        <section class="card">
+            <h2 class="card__title">Gestión de Productos</h2>
+            <p class="card__text">
+                Panel administrativo para administrar productos del sistema.
+            </p>
+
+            <div class="d-flex gap-2 my-3 align-items-center flex-wrap">
+
+                <input type="text"
+                       name="buscar_producto"
+                       placeholder="Buscar producto..."
+                       class="form-control form-control-sm" />
+
+                <button type="button" class="btn btn-primary btn-sm">
+                    + Agregar
+                </button>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Resumen del Sistema</h2>
+
+            <div class="row row-cols-1 row-cols-md-4 g-3">
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Total de productos</h3>
+                        <p class="fs-4 fw-bold text-primary mb-0">128</p>
+                    </div>
+                </article>
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Stock bajo</h3>
+                        <p class="fs-4 fw-bold text-warning mb-0">14</p>
+                    </div>
+                </article>
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Disponibles</h3>
+                        <p class="fs-4 fw-bold text-success mb-0">97</p>
+                    </div>
+                </article>
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Agotados</h3>
+                        <p class="fs-4 fw-bold text-danger mb-0">17</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Tabla de productos</h2>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered align-middle">
+
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -66,82 +154,106 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
+
                     <tbody>
+
                         <tr>
                             <td>Cuaderno A4</td>
                             <td>Útiles</td>
                             <td>45</td>
                             <td>Disponible</td>
-                            <td>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                            <td class="d-flex gap-2 flex-wrap">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger">Eliminar</button>
                             </td>
                         </tr>
+
                         <tr>
                             <td>Lapicera Azul</td>
                             <td>Escritura</td>
                             <td>8</td>
                             <td>Stock bajo</td>
-                            <td>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                            <td class="d-flex gap-2 flex-wrap">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger">Eliminar</button>
                             </td>
                         </tr>
+
                         <tr>
                             <td>Carpeta Plástica</td>
                             <td>Archivado</td>
                             <td>0</td>
                             <td>Agotado</td>
-                            <td>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Editar</button>
-                                <button type="button" class="nav__link" style="padding: 0.4rem 0.7rem; font-size: 0.9rem;">Eliminar</button>
+                            <td class="d-flex gap-2 flex-wrap">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger">Eliminar</button>
                             </td>
                         </tr>
+
                     </tbody>
+
                 </table>
-            </section>
 
-            <section class="card">
-                <h2 class="card__title">Agregar/Editar Producto</h2>
-                <form style="display: grid; gap: 1rem;">
-                    <div>
-                        <label for="nombre">Nombre</label>
-                        <input id="nombre" type="text" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
-                    </div>
+            </div>
+        </section>
 
-                    <div>
-                        <label for="categoria">Categoría</label>
-                        <select id="categoria" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);">
-                            <option>Seleccionar categoría</option>
-                            <option>Útiles</option>
-                            <option>Escritura</option>
-                            <option>Archivado</option>
-                            <option>Accesorios</option>
-                        </select>
-                    </div>
+        <section class="card">
+            <h2 class="card__title">Agregar/Editar Producto</h2>
 
-                    <div>
-                        <label for="precio">Precio</label>
-                        <input id="precio" type="number" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
-                    </div>
+            <form class="row g-3">
 
-                    <div>
-                        <label for="stock">Stock</label>
-                        <input id="stock" type="number" style="width: 100%; padding: 0.5rem; border-radius: var(--radius); border: 1px solid var(--border);" />
-                    </div>
+                <div class="col-12">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="nombre" class="form-control form-control-sm">
+                </div>
 
-                    <div style="display: flex; gap: 1rem;">
-                        <button type="button" class="nav__link">Guardar</button>
-                        <button type="button" style="background: var(--muted); padding: 0.5rem 0.9rem; border-radius: var(--radius); text-decoration: none; color: white; border: none; cursor: pointer;">Cancelar</button>
-                    </div>
-                </form>
-            </section>
-        </main>
+                <div class="col-12">
+                    <label class="form-label">Categoría</label>
+                    <select name="categoria" class="form-select form-select-sm">
+                        <option>Seleccionar categoría</option>
+                        <option>Útiles</option>
+                        <option>Escritura</option>
+                        <option>Archivado</option>
+                        <option>Accesorios</option>
+                    </select>
+                </div>
 
-        <footer class="footer">
-            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
-            <p class="footer__text">Grupo LCR</p>
-        </footer>
-    </div>
+                <div class="col-12">
+                    <label class="form-label">Precio</label>
+                    <input type="text" name="precio" class="form-control form-control-sm">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Stock</label>
+                    <input type="number" name="stock" class="form-control form-control-sm">
+                </div>
+
+                <div class="col-12 d-flex gap-2">
+                    <button type="button" class="btn btn-primary btn-sm">
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm">
+                        Cancelar
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="footer text-center py-3">
+        <p class="footer__text mb-0">
+            Proyecto Gestión de Inventario - Full Stack I - 2026
+        </p>
+        <p class="footer__text mb-0">
+            Grupo LCR
+        </p>
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
