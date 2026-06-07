@@ -3,155 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
     <title>Dashboard Admin - Gestión de Productos</title>
 </head>
+
 <body>
-    <div class="page">
-        <header class="header">
-            <h1 class="header__title">Sistema de Gestión de Inventario</h1>
-            <nav class="nav">
-                <ul class="nav__list">
-                    <li><a href="index.html" class="nav__link">Inicio</a></li>
-                    <li><a href="dashboard-admin.html" class="nav__link">Productos</a></li>
-                    <li><a href="stock.html" class="nav__link">Stock</a></li>
-                    <li><a href="reportes.html" class="nav__link">Reportes</a></li>
-                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
-                    <li class="nav__item--login"><a href="login.html" class="nav__link">Cerrar sesión</a></li>
+
+<div class="page">
+
+    <header>
+        <nav class="navbar navbar-expand-lg custom-navbar px-3">
+
+            <h1 class="header__title">
+    Sistema de Gestión de Inventario
+</h1>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menuNav"
+                aria-controls="menuNav"
+                aria-expanded="false"
+                aria-label="Menú">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="index.html">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="dashboard-admin.html">Productos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="stock.html">Stock</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="reportes.html">Reportes</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="quienes-somos.html">Quiénes Somos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav__link nav__item--login btn btn-sm btn-outline-danger"
+                           href="login.html">
+                            Cerrar sesión
+                        </a>
+                    </li>
+
                 </ul>
-            </nav>
-        </header>
 
-        <main class="main">
-            <section class="card">
-                <h2 class="card__title">Gestión de Productos</h2>
-                <p class="card__text">Panel administrativo para administrar productos del sistema.</p>
-                <div class="d-flex gap-3 my-3">
-                    <input type="text" placeholder="Buscar producto..." class="form-control" />
-                    <button type="button" class="btn btn-primary">Agregar producto</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- GESTIÓN -->
+        <section class="card">
+            <h2 class="card__title">Gestión de Productos</h2>
+            <p class="card__text">
+                Panel administrativo para administrar productos del sistema.
+            </p>
+
+            <div class="d-flex gap-2 my-3 align-items-center flex-wrap">
+
+                <input type="text"
+                       placeholder="Buscar producto..."
+                       class="form-control form-control-sm" />
+
+                <button type="button" class="btn btn-primary btn-sm">
+                    + Agregar
+                </button>
+
+            </div>
+        </section>
+
+        <!-- RESUMEN -->
+        <section class="card">
+            <h2 class="card__title">Resumen del Sistema</h2>
+
+            <div class="row row-cols-1 row-cols-md-4 g-3">
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Total de productos</h3>
+                        <p class="fs-4 fw-bold text-primary mb-0">128</p>
+                    </div>
+                </article>
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Stock bajo</h3>
+                        <p class="fs-4 fw-bold text-warning mb-0">14</p>
+                    </div>
+                </article>
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Disponibles</h3>
+                        <p class="fs-4 fw-bold text-success mb-0">97</p>
+                    </div>
+                </article>
+
+                <article class="col">
+                    <div class="border rounded p-3 bg-white h-100">
+                        <h3 class="h6 mb-1">Agotados</h3>
+                        <p class="fs-4 fw-bold text-danger mb-0">17</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- TABLA -->
+        <section class="card">
+            <h2 class="card__title">Tabla de productos</h2>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Cuaderno A4</td>
+                            <td>Útiles</td>
+                            <td>45</td>
+                            <td>Disponible</td>
+                            <td class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    Editar
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Lapicera Azul</td>
+                            <td>Escritura</td>
+                            <td>8</td>
+                            <td>Stock bajo</td>
+                            <td class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    Editar
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Carpeta Plástica</td>
+                            <td>Archivado</td>
+                            <td>0</td>
+                            <td>Agotado</td>
+                            <td class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    Editar
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </section>
+
+        <!-- FORM -->
+        <section class="card">
+            <h2 class="card__title">Agregar/Editar Producto</h2>
+
+            <form class="row g-3">
+
+                <div class="col-12">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control form-control-sm">
                 </div>
-            </section>
 
-            <section class="card">
-                <h2 class="card__title">Resumen del Sistema</h2>
-                <div class="row row-cols-1 row-cols-md-4 g-3">
-                    <article class="col">
-                        <div class="border rounded p-3 bg-white h-100">
-                            <h3 class="h6 mb-1">Total de productos</h3>
-                            <p class="fs-4 fw-bold text-primary mb-0">128</p>
-                        </div>
-                    </article>
-                    <article class="col">
-                        <div class="border rounded p-3 bg-white h-100">
-                            <h3 class="h6 mb-1">Productos con stock bajo</h3>
-                            <p class="fs-4 fw-bold text-warning mb-0">14</p>
-                        </div>
-                    </article>
-                    <article class="col">
-                        <div class="border rounded p-3 bg-white h-100">
-                            <h3 class="h6 mb-1">Productos disponibles</h3>
-                            <p class="fs-4 fw-bold text-success mb-0">97</p>
-                        </div>
-                    </article>
-                    <article class="col">
-                        <div class="border rounded p-3 bg-white h-100">
-                            <h3 class="h6 mb-1">Productos agotados</h3>
-                            <p class="fs-4 fw-bold text-danger mb-0">17</p>
-                        </div>
-                    </article>
+                <div class="col-12">
+                    <label class="form-label">Categoría</label>
+                    <select class="form-select form-select-sm">
+                        <option>Seleccionar categoría</option>
+                        <option>Útiles</option>
+                        <option>Escritura</option>
+                        <option>Archivado</option>
+                        <option>Accesorios</option>
+                    </select>
                 </div>
-            </section>
 
-            <section class="card">
-                <h2 class="card__title">Tabla de productos</h2>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Categoría</th>
-                                <th>Stock</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Cuaderno A4</td>
-                                <td>Útiles</td>
-                                <td>45</td>
-                                <td>Disponible</td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary">Editar</button>
-                                    <button type="button" class="btn btn-danger">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Lapicera Azul</td>
-                                <td>Escritura</td>
-                                <td>8</td>
-                                <td>Stock bajo</td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary">Editar</button>
-                                    <button type="button" class="btn btn-danger">Eliminar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carpeta Plástica</td>
-                                <td>Archivado</td>
-                                <td>0</td>
-                                <td>Agotado</td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary">Editar</button>
-                                    <button type="button" class="btn btn-danger">Eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="col-12">
+                    <label class="form-label">Precio</label>
+                    <input type="text" class="form-control form-control-sm">
                 </div>
-            </section>
 
-            <section class="card">
-                <h2 class="card__title">Agregar/Editar Producto</h2>
-                <form>
-                    <div>
-                        <label for="nombre">Nombre</label>
-                        <input id="nombre" type="text" class="form-control" />
-                    </div>
-                    <div>
-                        <label for="categoria">Categoría</label>
-                       <select id="categoria" class="form-select">
-                            <option>Seleccionar categoría</option>
-                            <option>Útiles</option>
-                            <option>Escritura</option>
-                            <option>Archivado</option>
-                            <option>Accesorios</option>
-                        </select>
-                    </div>
+                <div class="col-12">
+                    <label class="form-label">Stock</label>
+                    <input type="number" class="form-control form-control-sm">
+                </div>
 
-                    <div>
-                        <label for="precio">Precio</label>
-                        <input id="precio" type="text" class="form-control" />
-                    </div>
+                <div class="col-12 d-flex gap-2">
+                    <button type="button" class="btn btn-primary btn-sm">
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm">
+                        Cancelar
+                    </button>
+                </div>
 
-                    <div>
-                        <label for="stock">Stock</label>
-                        <input id="stock" type="number" class="form-control" />
-                    </div>
+            </form>
+        </section>
 
-                    <div class="d-flex gap-3">
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-secondary">Cancelar</button>
-                    </div>
-                </form>
-            </section>
-        </main>
+    </main>
 
-        <footer class="footer">
-            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
-            <p class="footer__text">Grupo LCR</p>
-        </footer>
-    </div>
+    <!-- FOOTER -->
+    <footer class="footer text-center py-3">
+        <p class="footer__text mb-0">
+            Proyecto Gestión de Inventario - Full Stack I - 2026
+        </p>
+        <p class="footer__text mb-0">
+            Grupo LCR
+        </p>
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

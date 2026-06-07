@@ -3,58 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
     <title>Quiénes Somos - Gestión de Inventario</title>
 </head>
+
 <body>
-    <div class="page">
-        <header class="header">
-            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-start gap-3">
-                <h1 class="header__title">Sistema de Gestión de Inventario</h1>
-                <ul class="list-unstyled d-flex flex-wrap justify-content-lg-end gap-2 mb-0">
-                    <li><a href="login.html" class="nav__link">Iniciar Sesión</a></li>
-                    <li><a href="registro.html" class="nav__link">Registrarme</a></li>
+
+<div class="page">
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg custom-navbar px-3">
+
+            <h1 class="header__title">
+    Sistema de Gestión de Inventario
+</h1>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menuNav"
+                aria-controls="menuNav"
+                aria-expanded="false"
+                aria-label="Menú de navegación">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2 text-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="index.html">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav__link" href="quienes-somos.html">Quiénes Somos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-outline-primary nav__link" href="login.html">
+                            Iniciar Sesión
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-outline-secondary nav__link" href="registro.html">
+                            Registrarme
+                        </a>
+                    </li>
+
                 </ul>
+
             </div>
-            <nav class="mt-3" aria-label="Navegación principal">
-                <ul class="list-unstyled d-flex flex-wrap justify-content-center gap-2 mb-0">
-                    <li><a href="index.html" class="nav__link">Inicio</a></li>
-                    <li><a href="quienes-somos.html" class="nav__link">Quiénes Somos</a></li>
-                </ul>
-            </nav>
-        </header>
 
-        <main class="main">
-            <section class="card">
-                <img src="img/Logo-LCR.png" class="img-fluid d-block mx-auto mb-2 w-50" alt="Logo del grupo LCR">
-                <h2 class="card__title">Quiénes Somos</h2>
-                <p class="card__text">Somos el Grupo LCR, un equipo de estudiantes que desarrolla este Sistema de Gestión de Inventario como parte de la materia Full Stack I.</p>
-                <p class="card__text">El proyecto apunta a ordenar la información de productos y stock con una estructura simple, clara y fácil de consultar. Buscamos representar una solución académica prolija, con una lógica cercana a la de un sistema de uso cotidiano.</p>
-            </section>
+        </nav>
 
-            <section class="card">
-                <h2 class="card__title">Integrantes del Grupo</h2>
-                <ul class="list-group">
-                    <li class="list-group-item">Facundo Rodríguez</li>
-                    <li class="list-group-item">Matias Rodriguez</li>
-                    <li class="list-group-item">Julia Lanfranco</li>
-                    <li class="list-group-item">Carolina Lanfranco</li>
-                    <li class="list-group-item">Diego Cordoba</li>
-                </ul>
-            </section>
+    </header>
 
-            <section class="card">
-                <h2 class="card__title">Propósito del Proyecto</h2>
-                <p class="card__text">El propósito de este proyecto es mostrar, de forma ordenada y sencilla, cómo podría organizarse un sistema básico para administrar inventario. La maqueta reúne las secciones principales para consultar productos, controlar stock y separar accesos según el rol de cada usuario.</p>
-                <p class="card__text">También nos permite poner en práctica lo trabajado en la materia Full Stack I, usando HTML, CSS y Bootstrap como base de desarrollo. Buscamos una presentación clara, prolija y cercana a una herramienta real de uso diario.</p>
-            </section>
-        </main>
+    <!-- MAIN -->
+    <main class="main">
 
-        <footer class="footer">
-            <p class="footer__text">Proyecto Gestión de Inventario - Full Stack I - 2026</p>
-            <p class="footer__text">Grupo LCR</p>
-        </footer>
-    </div>
+        <section class="card">
+            <img src="img/Logo-LCR.png"
+                 class="img-fluid d-block mx-auto mb-2 w-50"
+                 alt="Logo del grupo LCR">
+
+            <h2 class="card__title">Quiénes Somos</h2>
+
+            <p class="card__text">
+                Somos el Grupo LCR, un equipo de estudiantes que desarrolla este Sistema de Gestión de Inventario como parte de la materia Full Stack I.
+            </p>
+
+            <p class="card__text">
+                El proyecto busca ordenar la información de productos y stock con una estructura simple, clara y fácil de consultar.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Integrantes del Grupo</h2>
+
+            <ul class="list-group">
+                <li class="list-group-item">Facundo Rodríguez</li>
+                <li class="list-group-item">Matias Rodriguez</li>
+                <li class="list-group-item">Julia Lanfranco</li>
+                <li class="list-group-item">Carolina Lanfranco</li>
+                <li class="list-group-item">Diego Cordoba</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Propósito del Proyecto</h2>
+
+            <p class="card__text">
+                El propósito es mostrar un sistema básico de inventario con organización de productos, stock y roles de usuario.
+            </p>
+
+            <p class="card__text">
+                Se desarrolla como práctica académica usando HTML, CSS y Bootstrap.
+            </p>
+        </section>
+
+    </main>
+
+    
+    <footer class="footer text-center">
+
+        <p class="footer__text">
+            Proyecto Gestión de Inventario - Full Stack I - 2026
+        </p>
+
+        <p class="footer__text">
+            Grupo LCR
+        </p>
+
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
