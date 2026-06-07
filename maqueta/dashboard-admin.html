@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/custom.css">
+
     <title>Dashboard Admin - Gestión de Productos</title>
 </head>
 
@@ -16,8 +18,8 @@
         <nav class="navbar navbar-expand-lg custom-navbar px-3">
 
             <h1 class="header__title">
-    Sistema de Gestión de Inventario
-</h1>
+                Sistema de Gestión de Inventario
+            </h1>
 
             <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse"
@@ -54,8 +56,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav__link nav__item--login btn btn-sm btn-outline-danger"
-                           href="login.html">
+                        <a class="btn btn-sm btn-logout" href="login.html">
                             Cerrar sesión
                         </a>
                     </li>
@@ -66,10 +67,8 @@
         </nav>
     </header>
 
-    <!-- MAIN -->
     <main class="main">
 
-        <!-- GESTIÓN -->
         <section class="card">
             <h2 class="card__title">Gestión de Productos</h2>
             <p class="card__text">
@@ -89,7 +88,6 @@
             </div>
         </section>
 
-        <!-- RESUMEN -->
         <section class="card">
             <h2 class="card__title">Resumen del Sistema</h2>
 
@@ -126,7 +124,6 @@
             </div>
         </section>
 
-        <!-- TABLA -->
         <section class="card">
             <h2 class="card__title">Tabla de productos</h2>
 
@@ -198,7 +195,6 @@
             </div>
         </section>
 
-        <!-- FORM -->
         <section class="card">
             <h2 class="card__title">Agregar/Editar Producto</h2>
 
@@ -244,7 +240,6 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer text-center py-3">
         <p class="footer__text mb-0">
             Proyecto Gestión de Inventario - Full Stack I - 2026
@@ -255,6 +250,19 @@
     </footer>
 
 </div>
+
+<style>
+.btn-logout {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.btn-logout:hover {
+    background-color: #f1b0b7;
+    color: #842029;
+}
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
