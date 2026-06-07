@@ -21,11 +21,11 @@ El diseño, maquetación y desarrollo de este sistema está a cargo de:
 * **Framework CSS:** **Bootstrap 5** (Implementación del sistema de Grid/Grillas y componentes responsivos).
 * **Calidad y Estándares:** Validación de código mediante **W3C Validator** y auditorías de rendimiento/accesibilidad con **Google Lighthouse**.
 
-## 📱 Maquetación Responsive (UI Adaptable)
+##  Maquetación Responsive (UI Adaptable)
 
 La interfaz de usuario (UI) de todas las pantallas del sistema ha sido diseñada bajo el enfoque *Responsive*, asegurando que los menús de navegación, formularios de carga y tablas de stock se adapten automáticamente a cualquier tamaño de pantalla (Computadoras, Tablets y Celulares) gracias a las clases nativas de Bootstrap.
 
-## 📖 Documentación del Proyecto (Wiki)
+##  Documentación del Proyecto (Wiki)
 
 Hemos centralizado la documentación formal requerida para esta etapa en la **Wiki** de este repositorio. Te invitamos a visitarla para revisar en detalle:
 1. **Historias de Usuario (HU):** Requisitos funcionales y criterios de aceptación.
