@@ -175,16 +175,57 @@ label {
 }
 
 @media (max-width: 767.98px) {
+    .header,
+    .main,
+    .footer {
+        width: calc(100% - 1rem);
+    }
+
     .header__title {
         font-size: 1.5rem;
     }
 
+    .header nav ul {
+        gap: .4rem;
+        margin-top: .75rem;
+    }
+
     .nav__link {
-        width: 100%;
+        width: auto;
         text-align: center;
+        padding: .35rem .65rem;
+        font-size: .95rem;
     }
 
     .card {
         padding: .9rem;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        min-width: 640px;
+    }
+
+    .table tbody td,
+    .table thead th {
+        white-space: nowrap;
+    }
+
+    .table tbody td .btn {
+        padding: .25rem .55rem;
+        font-size: .85rem;
+    }
+
+    .table tbody td .btn + .btn {
+        margin-left: .25rem;
+    }
+
+    .table td,
+    .table th {
+        padding: .65rem .75rem;
     }
 }
