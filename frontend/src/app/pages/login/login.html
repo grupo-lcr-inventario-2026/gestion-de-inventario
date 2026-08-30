@@ -1,5 +1,38 @@
-<!-- TODO (Mati): portar maqueta/login.html a un Reactive Form (usuario/email + password) -->
-<section class="card">
-    <h2 class="card__title">Iniciar Sesión</h2>
-    <p class="card__text">Pendiente: Reactive Form de login contra AuthService.</p>
+<section class="card shadow-sm p-4 p-md-5" style="max-width: 420px; margin: 0 auto;">
+    <h2 class="card__title text-center mb-4">Iniciar Sesión</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Usuario o mail</label>
+            <input type="email" id="email" formControlName="email" class="form-control"
+                   [class.is-invalid]="form.controls['email'].invalid && form.controls['email'].touched">
+            @if (form.controls['email'].invalid && form.controls['email'].touched) {
+                <div class="invalid-feedback">Ingresá un email válido.</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" id="password" formControlName="password" class="form-control"
+                   [class.is-invalid]="form.controls['password'].invalid && form.controls['password'].touched">
+            @if (form.controls['password'].invalid && form.controls['password'].touched) {
+                <div class="invalid-feedback">La contraseña es obligatoria.</div>
+            }
+        </div>
+
+        @if (error) {
+            <div class="alert alert-danger py-2">Usuario o contraseña incorrectos.</div>
+        }
+
+        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+    </form>
+
+    <p class="mt-3 text-center">
+        ¿No tenés cuenta?
+        <a routerLink="/registro">Registrarse</a>
+    </p>
+
+    <p class="text-center">
+        <a routerLink="/recuperar-password" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+    </p>
 </section>
