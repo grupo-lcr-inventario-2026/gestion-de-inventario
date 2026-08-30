@@ -1,59 +1,68 @@
-# Frontend
+# Frontend - SPA Angular (Evidencia de Aprendizaje 4)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.3.
+SPA en Angular que evoluciona la maqueta estática de `../maqueta/` (Evidencia 3) a una
+aplicación de página única, con ruteo, formularios reactivos y datos simulados (no hay
+backend todavía).
 
-## Development server
+## Requisitos
 
-To start a local development server, run:
+- Node.js **24.19.0**
+- Angular CLI **22.1.3** (`npm install -g @angular/cli@22.1.3`)
+
+## Instalación y ejecución local
 
 ```bash
+cd frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Abrir `http://localhost:4200/`. La app recarga sola al guardar cambios.
 
-## Code scaffolding
+## Usuarios de prueba
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+> Pendiente: `core/auth/auth.service.ts` todavía no tiene los usuarios simulados
+> (login/registro reales) — se completa en `feat/angular-auth`. Una vez cargados,
+> documentar acá el email/contraseña de un usuario `admin` y uno `user` para probar
+> ambos roles.
 
-```bash
-ng generate component component-name
+## Estructura de carpetas
+
+```
+src/app/
+  core/
+    auth/         AuthService (sesión + rol) y authGuard
+    models/       interfaces compartidas (Usuario, Producto, etc.)
+  layout/
+    public-layout/     navbar pública + footer (rutas públicas)
+    dashboard-layout/  navbar de dashboard (rol visible) + footer (rutas protegidas)
+  shared/
+    navbar-publica/, navbar-dashboard/, footer/
+  pages/
+    home/, quienes-somos/, login/, registro/, recuperar-password/
+    dashboard/productos/, dashboard/stock/, dashboard/reportes/
+    not-found/
+  app.routes.ts   árbol de rutas (públicas, /dashboard protegido, 404)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Rutas
 
-```bash
-ng generate --help
-```
+| Ruta | Acceso | Componente |
+|---|---|---|
+| `/` | Público | Home |
+| `/quienes-somos` | Público | QuienesSomos |
+| `/login` | Público | Login |
+| `/registro` | Público | Registro |
+| `/recuperar-password` | Público | RecuperarPassword |
+| `/dashboard/productos` | Autenticado (Admin: CRUD / User: solo lectura) | Productos |
+| `/dashboard/stock` | Autenticado (Admin: edita / User: solo lectura) | Stock |
+| `/dashboard/reportes` | Autenticado (ambos roles, solo lectura) | Reportes |
+| `**` | — | NotFound (404) |
 
-## Building
-
-To build the project run:
+## Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Genera los artefactos de producción en `dist/frontend`.
