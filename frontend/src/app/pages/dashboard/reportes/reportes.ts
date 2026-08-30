@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 interface AlertaStock {
   id: number;
@@ -14,7 +15,8 @@ interface AlertaStock {
 @Component({
   selector: 'app-reportes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
+  styles: ``,
   templateUrl: './reportes.html',
   styleUrl: './reportes.css'
 })
