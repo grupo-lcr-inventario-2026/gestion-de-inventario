@@ -35,5 +35,8 @@ export const routes: Routes = [
       { path: 'reportes', component: Reportes },
     ],
   },
+  // Fuera de ambos layouts a proposito: '**' con pathMatch prefix dentro del
+  // grupo '' (PublicLayout) capturaria /dashboard antes de llegar a esa ruta,
+  // porque el router prueba los hijos de '' en orden. Se deja como ruta propia.
   { path: '**', component: NotFound },
 ];
