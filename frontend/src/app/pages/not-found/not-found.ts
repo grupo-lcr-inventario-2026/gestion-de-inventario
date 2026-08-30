@@ -8,6 +8,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   styles: ``,
   templateUrl: './not-found.html',
-  styleUrl: './not-found.css'
+
 })
 export class NotFound {}
