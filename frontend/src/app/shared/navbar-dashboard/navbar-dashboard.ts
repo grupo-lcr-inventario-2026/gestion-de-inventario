@@ -12,7 +12,9 @@ export class NavbarDashboard {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
-  readonly usuario = this.authService.usuario;
+  usuario() {
+    return this.authService.usuario();
+  }
 
   esAdmin(): boolean {
     return this.authService.rolActual() === 'admin';

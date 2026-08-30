@@ -21,10 +21,12 @@ Abrir `http://localhost:4200/`. La app recarga sola al guardar cambios.
 
 ## Usuarios de prueba
 
-> Pendiente: `core/auth/auth.service.ts` todavía no tiene los usuarios simulados
-> (login/registro reales) — se completa en `feat/angular-auth`. Una vez cargados,
-> documentar acá el email/contraseña de un usuario `admin` y uno `user` para probar
-> ambos roles.
+| Rol | Email | Contraseña |
+|---|---|---|
+| Admin | admin@lcr.com | admin123 |
+| User | user@lcr.com | user123 |
+
+También se puede crear un usuario nuevo desde `/registro` (queda con rol `user`).
 
 ## Estructura de carpetas
 
