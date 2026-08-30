@@ -1,0 +1,210 @@
+/* Estilos globales portados de maqueta/css/custom.css para mantener
+   la misma identidad visual aprobada en la Evidencia 3. */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f9fa;
+    color: #212529;
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header,
+.main,
+.footer {
+    width: min(1100px, calc(100% - 2rem));
+    margin: 0 auto;
+}
+
+.header {
+    padding: 1rem 0;
+}
+
+.header__title {
+    margin-bottom: 0;
+    color: #0d6efd;
+    font-size: 1.8rem;
+}
+
+.header__subtitle {
+    margin: .25rem 0 0;
+    color: #6c757d;
+    font-size: .95rem;
+}
+
+.nav__link {
+    display: inline-block;
+    padding: .4rem .75rem;
+    border: 1px solid #bfdbfe;
+    border-radius: .375rem;
+    background: #dbeafe;
+    color: #1d4ed8;
+    text-decoration: none;
+}
+
+.nav__link:hover {
+    background: #bfdbfe;
+    color: #1d4ed8;
+}
+
+.nav__link:focus-visible {
+    outline: 2px solid rgba(59, 130, 246, .35);
+    outline-offset: 2px;
+}
+
+.nav__link.active {
+    background: #1d4ed8;
+    color: #fff;
+}
+
+.rol-badge {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    padding: .3rem .6rem;
+    border-radius: 999px;
+}
+
+.rol-badge--admin {
+    background: #d1e7dd;
+    color: #146c43;
+}
+
+.rol-badge--user {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-logout {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.btn-logout:hover {
+    background-color: #f1b0b7;
+    color: #842029;
+}
+
+.main {
+    flex: 1;
+    display: grid;
+    gap: 1rem;
+    padding: 1rem 0 1.5rem;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+.card__title {
+    margin-bottom: .5rem;
+    font-size: 1.25rem;
+}
+
+.card__text {
+    margin-bottom: .75rem;
+    color: #6c757d;
+}
+
+.status {
+    display: inline-block;
+    padding: .2rem .55rem;
+    border-radius: 999px;
+    font-size: .85rem;
+    background: #e9ecef;
+}
+
+.status--ok {
+    background: #d1e7dd;
+    color: #146c43;
+}
+
+.status--warn {
+    background: #fff3cd;
+    color: #8a6d00;
+}
+
+.status--bad {
+    background: #f8d7da;
+    color: #b02a37;
+}
+
+.form-control,
+.form-select,
+.btn {
+    border-radius: .375rem;
+}
+
+.table-responsive {
+    border: 1px solid #dee2e6;
+    border-radius: .5rem;
+    background: #fff;
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead {
+    background: #f1f3f5;
+}
+
+.table thead th {
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.table tbody td .btn + .btn {
+    margin-left: .35rem;
+}
+
+label {
+    margin-bottom: .35rem;
+    font-size: .95rem;
+}
+
+.card form > div {
+    margin-bottom: .9rem;
+}
+
+.card form > div:last-child {
+    margin-bottom: 0;
+}
+
+.footer {
+    padding: .75rem 0 1.25rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.footer__text + .footer__text {
+    margin-top: .25rem;
+}
+
+@media (max-width: 767.98px) {
+    .header__title {
+        font-size: 1.5rem;
+    }
+
+    .nav__link {
+        width: 100%;
+        text-align: center;
+    }
+
+    .card {
+        padding: .9rem;
+    }
+}
