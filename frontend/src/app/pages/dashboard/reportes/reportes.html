@@ -1,5 +1,74 @@
-<!-- TODO (Diego): portar maqueta/reportes.html (estadísticas y alertas, lectura para ambos roles) -->
-<section class="card">
-    <h2 class="card__title">Panel de Reportes</h2>
-    <p class="card__text">Pendiente: estadísticas generales y alertas del sistema.</p>
-</section>
+  <main class="main">
+
+        <section class="card">
+            <h2 class="card__title">Panel de Reportes</h2>
+            <p class="card__text">
+                En esta sección se visualizan los reportes generales del sistema de inventario y el estado actual del stock disponible.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Estadísticas Generales</h2>
+
+            <ul class="list-group" role="list">
+                <li class="list-group-item"><strong>Productos Registrados:</strong> 125</li>
+                <li class="list-group-item"><strong>Productos con Bajo Stock:</strong> 8</li>
+                <li class="list-group-item"><strong>Stock Disponible:</strong> 3.450 unidades</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Tabla de Reportes</h2>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Notebook HP</td>
+                            <td>Tecnología</td>
+                            <td>15</td>
+                            <td>Disponible</td>
+                        </tr>
+                        <tr>
+                            <td>Mouse Logitech</td>
+                            <td>Accesorios</td>
+                            <td>4</td>
+                            <td>Bajo Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Teclado Redragon</td>
+                            <td>Accesorios</td>
+                            <td>0</td>
+                            <td>Sin Stock</td>
+                        </tr>
+                        <tr>
+                            <td>Monitor Samsung</td>
+                            <td>Pantallas</td>
+                            <td>9</td>
+                            <td>Disponible</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Alertas del Sistema</h2>
+
+            <ul class="list-group" role="list">
+                <li class="list-group-item">Hay productos con bajo stock</li>
+                <li class="list-group-item">Existen productos sin stock</li>
+                <li class="list-group-item">El sistema funciona correctamente</li>
+            </ul>
+        </section>
+
+    </main>
