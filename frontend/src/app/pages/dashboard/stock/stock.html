@@ -1,6 +1,87 @@
-<!-- TODO (Julia): portar maqueta/stock.html: listado de productos + Reactive Form
-     para actualizar cantidad (solo Admin), registrando el movimiento -->
-<section class="card">
-    <h2 class="card__title">Gestión de Stock</h2>
-    <p class="card__text">Pendiente: listado de stock desde StockService y Reactive Form de actualización (solo Admin).</p>
-</section>
+<main class="main py-4">
+    <div class="container">
+        <div class="row g-3">
+
+            <!-- TABLA DE PRODUCTOS EN EXISTENCIA -->
+            <div class="col-12 col-lg-8">
+                <section class="card p-3 p-md-4 shadow-sm">
+                    <h2 class="card__title mb-3">Productos en Existencia</h2>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Recorremos la lista de productos del servicio -->
+                                @for (item of productos; track item.id) {
+                                    <tr>
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.nombre }}</td>
+                                        <td>{{ item.cantidad }}</td>
+                                        <td>
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-sm btn-outline-primary"
+                                                (click)="seleccionarProducto(item)">
+                                                Seleccionar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                } @empty {
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">
+                                            No hay productos registrados en el inventario.
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- FORMULARIO REACTIVO DE ACTUALIZACIÓN DE STOCK -->
+            <div class="col-12 col-lg-4">
+                <section class="card p-3 p-md-4 shadow-sm">
+                    <h2 class="card__title mb-3">Actualizar Stock</h2>
+
+                    <form [formGroup]="stockForm" (ngSubmit)="actualizarStock()">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Producto seleccionado</label>
+                            <input 
+                                type="text" 
+                                class="form-control form-control-sm" 
+                                formControlName="productoNombre" 
+                                readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nueva Cantidad</label>
+                            <input 
+                                type="number" 
+                                class="form-control form-control-sm" 
+                                formControlName="cantidad" 
+                                placeholder="Ej: 21">
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            class="btn btn-primary btn-sm w-100"
+                            [disabled]="stockForm.invalid">
+                            Guardar cambios
+                        </button>
+
+                    </form>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</main>
