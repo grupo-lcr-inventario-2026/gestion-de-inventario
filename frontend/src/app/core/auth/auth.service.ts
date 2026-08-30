@@ -1,44 +1,68 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Rol, Usuario } from '../models/usuario.model';
 
-const SESSION_KEY = 'lcr-inventario:sesion';
-
-/**
- * Contrato mínimo para que el layout de dashboard, la navbar y el auth.guard
- * puedan compilar y navegar. La lógica real (usuarios seed, login, registro
- * y persistencia) la completa Mati en core/auth/auth.service.ts.
- */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly usuarioActual = signal<Usuario | null>(this.leerSesion());
+  private usuarios: Usuario[] = [
+    { id: 1, nombre: 'Ana', apellido: 'Admin', email: 'admin@lcr.com', password: 'admin123', rol: 'admin' },
+    { id: 2, nombre: 'Uriel', apellido: 'User', email: 'user@lcr.com', password: 'user123', rol: 'user' },
+  ];
 
-  readonly usuario = this.usuarioActual.asReadonly();
+  private usuarioActual: Usuario | null = null;
 
-  estaAutenticado(): boolean {
-    return this.usuarioActual() !== null;
+  constructor() {
+    const guardado = localStorage.getItem('usuarioActual');
+    if (guardado) {
+      this.usuarioActual = JSON.parse(guardado);
+    }
   }
 
-  rolActual(): Rol | null {
-    return this.usuarioActual()?.rol ?? null;
+  login(email: string, password: string): boolean {
+    const encontrado = this.usuarios.find(u => u.email === email && u.password === password);
+
+    if (!encontrado) {
+      return false;
+    }
+
+    this.usuarioActual = encontrado;
+    localStorage.setItem('usuarioActual', JSON.stringify(encontrado));
+    return true;
   }
 
-  // TODO(Mati): reemplazar por validación real contra usuarios seed.
-  login(_email: string, _password: string): boolean {
-    throw new Error('AuthService.login: pendiente de implementación (Mati).');
-  }
+  registrar(nombre: string, apellido: string, email: string, password: string): boolean {
+    const existe = this.usuarios.find(u => u.email === email);
 
-  // TODO(Mati): reemplazar por alta real de usuario (rol por defecto 'user').
-  registrar(_datos: Omit<Usuario, 'id' | 'rol'> & { password: string }): boolean {
-    throw new Error('AuthService.registrar: pendiente de implementación (Mati).');
+    if (existe) {
+      return false;
+    }
+
+    const nuevoUsuario: Usuario = {
+      id: this.usuarios.length + 1,
+      nombre: nombre,
+      apellido: apellido,
+      email: email,
+      password: password,
+      rol: 'user',
+    };
+
+    this.usuarios.push(nuevoUsuario);
+    return true;
   }
 
   logout(): void {
-    this.usuarioActual.set(null);
-    localStorage.removeItem(SESSION_KEY);
+    this.usuarioActual = null;
+    localStorage.removeItem('usuarioActual');
   }
 
-  private leerSesion(): Usuario | null {
-    const raw = localStorage.getItem(SESSION_KEY);
-    return raw ? (JSON.parse(raw) as Usuario) : null;
+  estaAutenticado(): boolean {
+    return this.usuarioActual !== null;
+  }
+
+  rolActual(): Rol | null {
+    return this.usuarioActual ? this.usuarioActual.rol : null;
+  }
+
+  usuario(): Usuario | null {
+    return this.usuarioActual;
   }
 }
