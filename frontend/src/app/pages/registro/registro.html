@@ -1,0 +1,55 @@
+<section class="card shadow-sm p-4" style="max-width: 420px; margin: 0 auto;">
+    <h2 class="text-center mb-4">Registro de Usuario</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control form-control-sm"
+                   [class.is-invalid]="form.controls['nombre'].invalid && form.controls['nombre'].touched">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Apellido</label>
+            <input type="text" formControlName="apellido" class="form-control form-control-sm"
+                   [class.is-invalid]="form.controls['apellido'].invalid && form.controls['apellido'].touched">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" formControlName="email" class="form-control form-control-sm"
+                   [class.is-invalid]="form.controls['email'].invalid && form.controls['email'].touched">
+            @if (form.controls['email'].invalid && form.controls['email'].touched) {
+                <div class="invalid-feedback">Ingresá un email válido.</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" formControlName="password" class="form-control form-control-sm"
+                   [class.is-invalid]="form.controls['password'].invalid && form.controls['password'].touched">
+            @if (form.controls['password'].invalid && form.controls['password'].touched) {
+                <div class="invalid-feedback">Mínimo 6 caracteres.</div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Confirmar contraseña</label>
+            <input type="password" formControlName="confirmarPassword" class="form-control form-control-sm"
+                   [class.is-invalid]="form.errors?.['passwordsDistintas'] && form.controls['confirmarPassword'].touched">
+            @if (form.errors?.['passwordsDistintas'] && form.controls['confirmarPassword'].touched) {
+                <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+            }
+        </div>
+
+        @if (emailDuplicado) {
+            <div class="alert alert-danger py-2">Ya existe una cuenta con ese email.</div>
+        }
+
+        <button type="submit" class="btn btn-primary btn-sm w-100">Registrarse</button>
+    </form>
+
+    <p class="text-center mt-3 mb-0">
+        ¿Ya tenés una cuenta?
+        <a routerLink="/login" class="nav__link">Iniciar sesión</a>
+    </p>
+</section>
