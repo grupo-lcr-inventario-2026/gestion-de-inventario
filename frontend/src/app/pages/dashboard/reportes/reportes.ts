@@ -15,10 +15,10 @@ interface AlertaStock {
   selector: 'app-reportes',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './reportes.component.html',
-  styleUrl: './reportes.component.css'
+  templateUrl: './reportes.html',
+  styleUrl: './reportes.css'
 })
-export class ReportesComponent implements OnInit {
+export class Reportes implements OnInit {
   
   totalProductos: number = 48;
   totalUnidadesStock: number = 1250;

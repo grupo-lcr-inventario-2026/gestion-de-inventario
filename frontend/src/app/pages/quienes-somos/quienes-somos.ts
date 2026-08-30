@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-quienes-somos',
   styles: ``,
   templateUrl: './quienes-somos.html',
-  styleUrl: './quienes-somos.css'
+  
   }
 )
 
