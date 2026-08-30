@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [CommonModule, ],
+  imports: [CommonModule, RouterLink],
   selector: 'app-quienes-somos',
   styles: ``,
   templateUrl: './quienes-somos.html',
