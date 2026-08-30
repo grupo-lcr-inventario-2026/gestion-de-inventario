@@ -4,7 +4,6 @@
 
 Proyecto académico desarrollado para la materia **Full Stack I (2026)**.
 
----
 
 ## Integrantes del Grupo LCR
 
@@ -18,7 +17,20 @@ El diseño, maquetación y desarrollo de este sistema está a cargo de:
 
 ## Tecnologías Utilizadas
 
-*   HTMLS y CSS
+* **Estructura y Estilos:** HTML5 y CSS3 personalizados.
+* **Framework CSS:** **Bootstrap 5** (Implementación del sistema de Grid/Grillas y componentes responsivos).
+* **Calidad y Estándares:** Validación de código mediante **W3C Validator** y auditorías de rendimiento/accesibilidad con **Google Lighthouse**.
+
+##  Maquetación Responsive (UI Adaptable)
+
+La interfaz de usuario (UI) de todas las pantallas del sistema ha sido diseñada bajo el enfoque *Responsive*, asegurando que los menús de navegación, formularios de carga y tablas de stock se adapten automáticamente a cualquier tamaño de pantalla (Computadoras, Tablets y Celulares) gracias a las clases nativas de Bootstrap.
+
+##  Documentación del Proyecto (Wiki)
+
+Hemos centralizado la documentación formal requerida para esta etapa en la **Wiki** de este repositorio. Te invitamos a visitarla para revisar en detalle:
+1. **Historias de Usuario (HU):** Requisitos funcionales y criterios de aceptación.
+2. **Flujo Completo del Sistema:** Mapa de navegación de pantallas de punta a punta.
+3. **Estrategia de Git:** Detalle de nuestro flujo de trabajo con ramas de características (`Feature Branch Workflow`), prefijos de commits (`feat:`, `fix:`, `refactor:`) y confirmaciones atómicas.
 
 ## Instrucciones de Instalación y Ejecución Local
 
