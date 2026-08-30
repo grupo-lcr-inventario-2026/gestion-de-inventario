@@ -1,24 +1,25 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StockService } from '../../../core/stock.service';
 
 @Component({
   selector: 'app-stock',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './stock.html',
 })
 export class Stock implements OnInit {
   private fb = inject(FormBuilder);
   private stockService = inject(StockService);
 
-  // Variable de productos requerida por stock.html
   productos: any[] = [];
   productoSeleccionado: any = null;
 
+  // Sumamos el campo 'nombre' como editable para los productos nuevos
   stockForm: FormGroup = this.fb.group({
-    productoId: ['', Validators.required],
-    productoNombre: [{ value: '', disabled: true }],
+    productoId: [''],
+    productoNombre: ['', Validators.required],
     cantidad: ['', [Validators.required, Validators.min(0)]],
   });
 
@@ -27,8 +28,14 @@ export class Stock implements OnInit {
   }
 
   cargarProductos(): void {
-    if (this.stockService && (this.stockService as any).obtenerProductos) {
-      this.productos = (this.stockService as any).obtenerProductos();
+    const servicio = this.stockService as any;
+
+    if (servicio.obtenerProductos) {
+      this.productos = servicio.obtenerProductos();
+    } else if (servicio.getProductos) {
+      this.productos = servicio.getProductos();
+    } else if (servicio.productos) {
+      this.productos = servicio.productos;
     }
   }
 
@@ -41,17 +48,43 @@ export class Stock implements OnInit {
     });
   }
 
+  // Cancela la selección para poder ingresar un producto nuevo
+  limpiarSeleccion(): void {
+    this.productoSeleccionado = null;
+    this.stockForm.reset();
+  }
+
   actualizarStock(): void {
     if (this.stockForm.valid) {
-      const { productoId, cantidad } = this.stockForm.getRawValue();
-      
-      if (this.stockService && (this.stockService as any).actualizarCantidad) {
-        (this.stockService as any).actualizarCantidad(productoId, cantidad);
-        this.cargarProductos();
+      const { productoId, productoNombre, cantidad } = this.stockForm.getRawValue();
+      const servicio = this.stockService as any;
+
+      if (this.productoSeleccionado) {
+        // CASO A: Actualizar producto existente
+        if (servicio.actualizarCantidad) {
+          servicio.actualizarCantidad(productoId, cantidad);
+        }
+
+        const prod = this.productos.find(p => p.id === productoId);
+        if (prod) {
+          prod.cantidad = cantidad;
+        }
+      } else {
+        // CASO B: Ingresar producto NUEVO al stock
+        const nuevoProducto = {
+          id: Date.now(),
+          nombre: productoNombre,
+          cantidad: cantidad
+        };
+
+        if (servicio.agregarProducto) {
+          servicio.agregarProducto(nuevoProducto);
+        } else {
+          this.productos.push(nuevoProducto);
+        }
       }
 
-      this.stockForm.reset();
-      this.productoSeleccionado = null;
+      this.limpiarSeleccion();
     }
   }
 }
