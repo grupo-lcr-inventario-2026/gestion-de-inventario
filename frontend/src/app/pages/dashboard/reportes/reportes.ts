@@ -18,7 +18,7 @@ interface AlertaStock {
   imports: [CommonModule, RouterLink],
   styles: ``,
   templateUrl: './reportes.html',
-  styleUrl: './reportes.css'
+ 
 })
 export class Reportes implements OnInit {
   
