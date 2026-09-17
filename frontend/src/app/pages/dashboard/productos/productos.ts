@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { Producto, calcularDisponibilidad } from '../../../core/models/producto.model';
+import { EstadoProducto, Producto, calcularDisponibilidad } from '../../../core/models/producto.model';
+import { Categoria } from '../../../core/models/categoria.model';
 import { ProductoService } from '../../../core/producto.service';
+import { CategoriaService } from '../../../core/categoria.service';
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule, NgClass],
   selector: 'app-productos',
   styles: ``,
   templateUrl: './productos.html',
 })
 export class Productos implements OnInit {
   productos: Producto[] = [];
-  categorias: string[] = [];
+  categorias: Categoria[] = [];
 
   formularioProducto: FormGroup;
+  nombreNuevaCategoria = '';
 
   esAdministrador = false;
   mostrarFormulario = false;
@@ -24,6 +28,7 @@ export class Productos implements OnInit {
 
   constructor(
     private productoService: ProductoService,
+    private categoriaService: CategoriaService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
   ) {
@@ -32,13 +37,15 @@ export class Productos implements OnInit {
       categoria: ['', Validators.required],
       precio: [0, [Validators.required, Validators.min(1)]],
       stock: [0, [Validators.required, Validators.min(0)]],
+      ubicacion: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.cargarProductos();
-
     this.esAdministrador = this.authService.rolActual() === 'admin';
+
+    this.cargarProductos();
+    this.cargarCategorias();
   }
 
   cargarProductos(): void {
@@ -47,8 +54,30 @@ export class Productos implements OnInit {
     });
   }
 
-  obtenerEstado(stock: number): string {
+  cargarCategorias(): void {
+    this.categoriaService.obtenerTodas().subscribe(categorias => {
+      this.categorias = categorias;
+    });
+  }
+
+  obtenerDisponibilidad(stock: number): string {
     return calcularDisponibilidad(stock);
+  }
+
+  claseDisponibilidad(stock: number): string {
+    const disponibilidad = calcularDisponibilidad(stock);
+
+    if (disponibilidad === 'Agotado') {
+      return 'bg-danger';
+    }
+    if (disponibilidad === 'Stock bajo') {
+      return 'bg-warning text-dark';
+    }
+    return 'bg-success';
+  }
+
+  obtenerEstado(estado: EstadoProducto): string {
+    return estado === 'almacenado' ? 'Almacenado' : 'Pendiente';
   }
 
   guardarProducto(): void {
@@ -57,7 +86,7 @@ export class Productos implements OnInit {
       return;
     }
 
-    const { nombre, categoria, precio, stock } = this.formularioProducto.value;
+    const { nombre, categoria, precio, stock, ubicacion } = this.formularioProducto.value;
 
     if (this.productoEditando) {
       const productoEditado = {
@@ -65,7 +94,7 @@ export class Productos implements OnInit {
         categoria: categoria,
         precio: precio,
         stock: stock,
-        ubicacion: this.productoEditando.ubicacion,
+        ubicacion: ubicacion,
         estado: this.productoEditando.estado,
         cantidadPendiente: this.productoEditando.cantidadPendiente,
       };
@@ -79,7 +108,7 @@ export class Productos implements OnInit {
         categoria: categoria,
         precio: precio,
         stock: stock,
-        ubicacion: '',
+        ubicacion: ubicacion,
         estado: 'almacenado' as const,
         cantidadPendiente: 0,
       };
@@ -101,6 +130,7 @@ export class Productos implements OnInit {
       categoria: producto.categoria,
       precio: producto.precio,
       stock: producto.stock,
+      ubicacion: producto.ubicacion,
     });
   }
 
@@ -124,6 +154,32 @@ export class Productos implements OnInit {
       categoria: '',
       precio: 0,
       stock: 0,
+      ubicacion: '',
+    });
+  }
+
+  agregarCategoria(): void {
+    const nombre = this.nombreNuevaCategoria.trim();
+
+    if (!nombre) {
+      return;
+    }
+
+    this.categoriaService.agregar({ nombre }).subscribe(() => {
+      this.nombreNuevaCategoria = '';
+      this.cargarCategorias();
+    });
+  }
+
+  eliminarCategoria(id: number): void {
+    const confirmar = confirm('¿Está seguro de eliminar esta categoría?');
+
+    if (!confirmar) {
+      return;
+    }
+
+    this.categoriaService.eliminar(id).subscribe(() => {
+      this.cargarCategorias();
     });
   }
 }
