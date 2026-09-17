@@ -1,0 +1,112 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Ana",
+      "apellido": "Admin",
+      "email": "admin@tp3d.com",
+      "password": "admin123",
+      "rol": "admin",
+      "activo": true
+    },
+    {
+      "id": 2,
+      "nombre": "Uriel",
+      "apellido": "Empleado",
+      "email": "empleado@tp3d.com",
+      "password": "empleado123",
+      "rol": "empleado",
+      "activo": true
+    }
+  ],
+  "categorias": [
+    { "id": 1, "nombre": "Impresoras 3D" },
+    { "id": 2, "nombre": "Filamentos" },
+    { "id": 3, "nombre": "Resinas" },
+    { "id": 4, "nombre": "Repuestos" }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Impresora Creality Ender-3 V3",
+      "categoria": "Impresoras 3D",
+      "precio": 450000,
+      "stock": 3,
+      "ubicacion": "Estante A1",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 2,
+      "nombre": "Impresora Bambu Lab A1 mini",
+      "categoria": "Impresoras 3D",
+      "precio": 520000,
+      "stock": 2,
+      "ubicacion": "Estante A2",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 3,
+      "nombre": "Filamento PLA 1kg Blanco",
+      "categoria": "Filamentos",
+      "precio": 18000,
+      "stock": 25,
+      "ubicacion": "Estante B1",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 4,
+      "nombre": "Filamento PLA 1kg Negro",
+      "categoria": "Filamentos",
+      "precio": 18000,
+      "stock": 8,
+      "ubicacion": "Estante B1",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 5,
+      "nombre": "Filamento PETG 1kg Transparente",
+      "categoria": "Filamentos",
+      "precio": 22000,
+      "stock": 12,
+      "ubicacion": "Estante B2",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 6,
+      "nombre": "Resina estandar 1L Gris",
+      "categoria": "Resinas",
+      "precio": 35000,
+      "stock": 6,
+      "ubicacion": "Estante C1",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 7,
+      "nombre": "Boquilla 0.4mm laton",
+      "categoria": "Repuestos",
+      "precio": 1500,
+      "stock": 40,
+      "ubicacion": "Estante D1",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 8,
+      "nombre": "Cama magnetica PEI 235mm",
+      "categoria": "Repuestos",
+      "precio": 12000,
+      "stock": 0,
+      "ubicacion": "Estante D2",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    }
+  ],
+  "movimientos": [],
+  "contactos": []
+}

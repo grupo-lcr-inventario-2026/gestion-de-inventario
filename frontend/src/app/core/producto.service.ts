@@ -1,53 +1,42 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Producto } from './models/producto.model';
+import { API_URL } from './api';
 
-export const CATEGORIAS = ['Útiles', 'Escritura', 'Archivado', 'Accesorios'];
-
+// Unico punto de acceso a la coleccion /productos de json-server.
+// Todos los metodos devuelven un Observable: el componente hace subscribe
+// para recibir la respuesta cuando llega.
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
-  private productos: Producto[] = [
-    { id: 1, nombre: 'Cuaderno A4', categoria: 'Útiles', precio: 1500, stock: 45 },
-    { id: 2, nombre: 'Lapicera Azul', categoria: 'Escritura', precio: 500, stock: 8 },
-    { id: 3, nombre: 'Carpeta Plástica', categoria: 'Archivado', precio: 900, stock: 0 },
-  ];
+  private url = `${API_URL}/productos`;
 
-  obtenerTodos(): Producto[] {
-    return this.productos;
+  constructor(private http: HttpClient) {}
+
+  obtenerTodos(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(this.url);
   }
 
-  obtenerPorId(id: number): Producto | undefined {
-    return this.productos.find(p => p.id === id);
+  obtenerPorId(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${this.url}/${id}`);
   }
 
-  agregar(nombre: string, categoria: string, precio: number, stock: number): void {
-    const nuevoProducto: Producto = {
-      id: this.productos.length + 1,
-      nombre: nombre,
-      categoria: categoria,
-      precio: precio,
-      stock: stock,
-    };
-    this.productos.push(nuevoProducto);
+  // Crea un producto. No se envia el id: lo genera json-server.
+  agregar(producto: Omit<Producto, 'id'>): Observable<Producto> {
+    return this.http.post<Producto>(this.url, producto);
   }
 
-  editar(id: number, nombre: string, categoria: string, precio: number, stock: number): void {
-    const producto = this.obtenerPorId(id);
-    if (producto) {
-      producto.nombre = nombre;
-      producto.categoria = categoria;
-      producto.precio = precio;
-      producto.stock = stock;
-    }
+  // Reemplaza el producto completo.
+  editar(id: number, producto: Omit<Producto, 'id'>): Observable<Producto> {
+    return this.http.put<Producto>(`${this.url}/${id}`, producto);
   }
 
-  eliminar(id: number): void {
-    this.productos = this.productos.filter(p => p.id !== id);
+  // Cambia solo los campos indicados (por ejemplo stock, estado, cantidadPendiente).
+  actualizarParcial(id: number, cambios: Partial<Producto>): Observable<Producto> {
+    return this.http.patch<Producto>(`${this.url}/${id}`, cambios);
   }
 
-  actualizarStock(id: number, nuevoStock: number): void {
-    const producto = this.obtenerPorId(id);
-    if (producto) {
-      producto.stock = nuevoStock;
-    }
+  eliminar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }
