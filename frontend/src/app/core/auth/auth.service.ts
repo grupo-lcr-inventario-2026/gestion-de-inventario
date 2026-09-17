@@ -4,8 +4,8 @@ import { Rol, Usuario } from '../models/usuario.model';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private usuarios: Usuario[] = [
-    { id: 1, nombre: 'Ana', apellido: 'Admin', email: 'admin@lcr.com', password: 'admin123', rol: 'admin' },
-    { id: 2, nombre: 'Uriel', apellido: 'User', email: 'user@lcr.com', password: 'user123', rol: 'user' },
+    { id: 1, nombre: 'Ana', apellido: 'Admin', email: 'admin@tp3d.com', password: 'admin123', rol: 'admin', activo: true },
+    { id: 2, nombre: 'Uriel', apellido: 'Empleado', email: 'empleado@tp3d.com', password: 'empleado123', rol: 'empleado', activo: true },
   ];
 
   private usuarioActual: Usuario | null = null;
@@ -42,7 +42,8 @@ export class AuthService {
       apellido: apellido,
       email: email,
       password: password,
-      rol: 'user',
+      rol: 'empleado',
+      activo: true,
     };
 
     this.usuarios.push(nuevoUsuario);

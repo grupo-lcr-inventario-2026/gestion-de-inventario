@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { Producto, calcularEstado } from '../../../core/models/producto.model';
-import { ProductoService, CATEGORIAS } from '../../../core/producto.service';
+import { Producto, calcularDisponibilidad } from '../../../core/models/producto.model';
+import { ProductoService } from '../../../core/producto.service';
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 })
 export class Productos implements OnInit {
   productos: Producto[] = [];
-  categorias = CATEGORIAS;
+  categorias: string[] = [];
 
   formularioProducto: FormGroup;
 
@@ -42,11 +42,13 @@ export class Productos implements OnInit {
   }
 
   cargarProductos(): void {
-    this.productos = this.productoService.obtenerTodos();
+    this.productoService.obtenerTodos().subscribe(productos => {
+      this.productos = productos;
+    });
   }
 
   obtenerEstado(stock: number): string {
-    return calcularEstado(stock);
+    return calcularDisponibilidad(stock);
   }
 
   guardarProducto(): void {
@@ -58,23 +60,35 @@ export class Productos implements OnInit {
     const { nombre, categoria, precio, stock } = this.formularioProducto.value;
 
     if (this.productoEditando) {
-      this.productoService.editar(
-        this.productoEditando.id,
-        nombre,
-        categoria,
-        precio,
-        stock,
-      );
+      const productoEditado = {
+        nombre: nombre,
+        categoria: categoria,
+        precio: precio,
+        stock: stock,
+        ubicacion: this.productoEditando.ubicacion,
+        estado: this.productoEditando.estado,
+        cantidadPendiente: this.productoEditando.cantidadPendiente,
+      };
+
+      this.productoService.editar(this.productoEditando.id, productoEditado).subscribe(() => {
+        this.cargarProductos();
+      });
     } else {
-      this.productoService.agregar(
-        nombre,
-        categoria,
-        precio,
-        stock,
-      );
+      const productoNuevo = {
+        nombre: nombre,
+        categoria: categoria,
+        precio: precio,
+        stock: stock,
+        ubicacion: '',
+        estado: 'almacenado' as const,
+        cantidadPendiente: 0,
+      };
+
+      this.productoService.agregar(productoNuevo).subscribe(() => {
+        this.cargarProductos();
+      });
     }
 
-    this.cargarProductos();
     this.cancelarFormulario();
   }
 
@@ -97,8 +111,9 @@ export class Productos implements OnInit {
       return;
     }
 
-    this.productoService.eliminar(id);
-    this.cargarProductos();
+    this.productoService.eliminar(id).subscribe(() => {
+      this.cargarProductos();
+    });
   }
 
   cancelarFormulario(): void {
