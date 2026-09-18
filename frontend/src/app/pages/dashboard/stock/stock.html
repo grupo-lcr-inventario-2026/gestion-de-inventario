@@ -1,33 +1,94 @@
 <section class="container py-4">
-    <div class="mb-4">
-        <h2>Stock</h2>
-        <p class="text-muted mb-0">Existencias del depósito y tareas pendientes.</p>
-    </div>
+  <div class="mb-4">
+    <h2>Stock</h2>
+    <p class="text-muted mb-0">
+      Existencias del depósito y tareas pendientes.
+    </p>
+  </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Categoría</th>
-                    <th>Stock</th>
-                    <th>Ubicación</th>
-                    <th>Estado</th>
-                    <th>Cantidad pendiente</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (producto of productos; track producto.id) {
-                    <tr>
-                        <td>{{ producto.nombre }}</td>
-                        <td>{{ producto.categoria }}</td>
-                        <td>{{ producto.stock }}</td>
-                        <td>{{ producto.ubicacion }}</td>
-                        <td>{{ producto.estado }}</td>
-                        <td>{{ producto.cantidadPendiente }}</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+  @if (mensaje) {
+    <div class="alert alert-success" role="alert">
+      {{ mensaje }}
     </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  }
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="h5">Registrar ingreso de mercadería</h3>
+      <p class="text-muted">
+        Registrá la cantidad que ingresó al depósito. El empleado deberá
+        almacenarla antes de que se actualice el stock.
+      </p>
+
+      <form [formGroup]="ingresoForm" (ngSubmit)="registrarIngreso()">
+        <div class="mb-3">
+          <label for="productoIngreso" class="form-label">Producto</label>
+
+          <select
+            id="productoIngreso"
+            class="form-select"
+            formControlName="productoId"
+          >
+            <option [value]="0">Seleccionar producto</option>
+
+            @for (producto of productos; track producto.id) {
+              <option [value]="producto.id">
+                {{ producto.nombre }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="cantidadIngreso" class="form-label">Cantidad</label>
+
+          <input
+            id="cantidadIngreso"
+            type="number"
+            class="form-control"
+            formControlName="cantidad"
+            min="1"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Registrar ingreso
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Categoría</th>
+          <th>Stock</th>
+          <th>Ubicación</th>
+          <th>Estado</th>
+          <th>Cantidad pendiente</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (producto of productos; track producto.id) {
+          <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.categoria }}</td>
+            <td>{{ producto.stock }}</td>
+            <td>{{ producto.ubicacion }}</td>
+            <td>{{ producto.estado }}</td>
+            <td>{{ producto.cantidadPendiente }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </section>
