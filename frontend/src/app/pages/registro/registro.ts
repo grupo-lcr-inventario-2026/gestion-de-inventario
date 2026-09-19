@@ -10,6 +10,7 @@ function passwordsIguales(form: FormGroup) {
   if (password === confirmar) {
     return null;
   }
+
   return { passwordsDistintas: true };
 }
 
@@ -51,13 +52,23 @@ export class Registro {
     const email = this.form.value.email;
     const password = this.form.value.password;
 
-    const exito = this.authService.registrar(nombre, apellido, email, password);
-
-    if (exito) {
-      this.emailDuplicado = false;
-      this.router.navigateByUrl('/login');
-    } else {
-      this.emailDuplicado = true;
-    }
+    this.authService.registrar(
+      nombre,
+      apellido,
+      email,
+      password
+    ).subscribe({
+      next: exito => {
+        if (exito) {
+          this.emailDuplicado = false;
+          this.router.navigateByUrl('/login');
+        } else {
+          this.emailDuplicado = true;
+        }
+      },
+      error: () => {
+        this.emailDuplicado = false;
+      },
+    });
   }
 }

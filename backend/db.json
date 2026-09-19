@@ -17,13 +17,52 @@
       "password": "empleado123",
       "rol": "empleado",
       "activo": true
+    },
+    {
+      "nombre": "Carolina",
+      "apellido": "Lanfranco",
+      "email": "carolina_lanfranco@hotmail.com",
+      "password": "caro123",
+      "rol": "admin",
+      "activo": true,
+      "id": 3
+    },
+    {
+      "nombre": "jesica",
+      "apellido": "roldan",
+      "email": "jesi@gmail.com",
+      "password": "jesi123",
+      "rol": "empleado",
+      "activo": true,
+      "id": 4
+    },
+    {
+      "nombre": "Julia",
+      "apellido": "Lanfranco",
+      "email": "ju@gmail.com",
+      "password": "ju123",
+      "rol": "empleado",
+      "activo": true,
+      "id": 5
     }
   ],
   "categorias": [
-    { "id": 1, "nombre": "Impresoras 3D" },
-    { "id": 2, "nombre": "Filamentos" },
-    { "id": 3, "nombre": "Resinas" },
-    { "id": 4, "nombre": "Repuestos" }
+    {
+      "id": 1,
+      "nombre": "Impresoras 3D"
+    },
+    {
+      "id": 2,
+      "nombre": "Filamentos"
+    },
+    {
+      "id": 3,
+      "nombre": "Resinas"
+    },
+    {
+      "id": 4,
+      "nombre": "Repuestos"
+    }
   ],
   "productos": [
     {
@@ -33,8 +72,8 @@
       "precio": 450000,
       "stock": 3,
       "ubicacion": "Estante A1",
-      "estado": "almacenado",
-      "cantidadPendiente": 0
+      "estado": "pendiente_almacenar",
+      "cantidadPendiente": 1
     },
     {
       "id": 2,
@@ -43,8 +82,8 @@
       "precio": 520000,
       "stock": 2,
       "ubicacion": "Estante A2",
-      "estado": "almacenado",
-      "cantidadPendiente": 0
+      "estado": "pendiente_almacenar",
+      "cantidadPendiente": 1
     },
     {
       "id": 3,
@@ -53,8 +92,8 @@
       "precio": 18000,
       "stock": 25,
       "ubicacion": "Estante B1",
-      "estado": "almacenado",
-      "cantidadPendiente": 0
+      "estado": "pendiente_preparar",
+      "cantidadPendiente": 1
     },
     {
       "id": 4,
@@ -83,8 +122,8 @@
       "precio": 35000,
       "stock": 6,
       "ubicacion": "Estante C1",
-      "estado": "almacenado",
-      "cantidadPendiente": 0
+      "estado": "pendiente_preparar",
+      "cantidadPendiente": 1
     },
     {
       "id": 7,
@@ -93,8 +132,8 @@
       "precio": 1500,
       "stock": 40,
       "ubicacion": "Estante D1",
-      "estado": "almacenado",
-      "cantidadPendiente": 0
+      "estado": "pendiente_preparar",
+      "cantidadPendiente": 1
     },
     {
       "id": 8,
