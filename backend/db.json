@@ -20,10 +20,22 @@
     }
   ],
   "categorias": [
-    { "id": 1, "nombre": "Impresoras 3D" },
-    { "id": 2, "nombre": "Filamentos" },
-    { "id": 3, "nombre": "Resinas" },
-    { "id": 4, "nombre": "Repuestos" }
+    {
+      "id": 1,
+      "nombre": "Impresoras 3D"
+    },
+    {
+      "id": 2,
+      "nombre": "Filamentos"
+    },
+    {
+      "id": 3,
+      "nombre": "Resinas"
+    },
+    {
+      "id": 4,
+      "nombre": "Repuestos"
+    }
   ],
   "productos": [
     {
