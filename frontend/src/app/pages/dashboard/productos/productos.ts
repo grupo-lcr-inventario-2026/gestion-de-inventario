@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -24,6 +24,9 @@ export class Productos implements OnInit {
   esAdministrador = false;
   mostrarFormulario = false;
 
+  // Se pone en true cuando no se pudo hablar con la API, para avisarle al usuario.
+  errorConexion = false;
+
   productoEditando: Producto | null = null;
 
   constructor(
@@ -31,6 +34,7 @@ export class Productos implements OnInit {
     private categoriaService: CategoriaService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
+    private cambios: ChangeDetectorRef,
   ) {
     this.formularioProducto = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -49,15 +53,32 @@ export class Productos implements OnInit {
   }
 
   cargarProductos(): void {
-    this.productoService.obtenerTodos().subscribe(productos => {
-      this.productos = productos;
+    this.productoService.obtenerTodos().subscribe({
+      next: productos => {
+        this.productos = productos;
+        this.errorConexion = false;
+        // Avisa que hay datos nuevos para que la tabla se vuelva a dibujar.
+        this.cambios.markForCheck();
+      },
+      error: () => this.avisarErrorConexion(),
     });
   }
 
   cargarCategorias(): void {
-    this.categoriaService.obtenerTodas().subscribe(categorias => {
-      this.categorias = categorias;
+    this.categoriaService.obtenerTodas().subscribe({
+      next: categorias => {
+        this.categorias = categorias;
+        this.errorConexion = false;
+        this.cambios.markForCheck();
+      },
+      error: () => this.avisarErrorConexion(),
     });
+  }
+
+  // Muestra el cartel de error cuando la API no responde.
+  avisarErrorConexion(): void {
+    this.errorConexion = true;
+    this.cambios.markForCheck();
   }
 
   obtenerDisponibilidad(stock: number): string {
