@@ -12,6 +12,12 @@
     }
   </div>
 
+  @if (errorConexion) {
+    <div class="alert alert-danger">
+      No se pudo conectar con el servidor. Verificá que la API esté levantada.
+    </div>
+  }
+
   @if (esAdministrador) {
     <div class="card mb-4">
       <div class="card-body">
