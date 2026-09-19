@@ -17,12 +17,18 @@ export class Stock implements OnInit {
   error = '';
 
   ingresoForm;
+  preparacionForm;
 
   constructor(
     private productoService: ProductoService,
     private formBuilder: FormBuilder,
   ) {
     this.ingresoForm = this.formBuilder.group({
+      productoId: [0, Validators.required],
+      cantidad: [1, [Validators.required, Validators.min(1)]],
+    });
+
+    this.preparacionForm = this.formBuilder.group({
       productoId: [0, Validators.required],
       cantidad: [1, [Validators.required, Validators.min(1)]],
     });
@@ -72,6 +78,53 @@ export class Stock implements OnInit {
           'Ingreso registrado. El empleado debe almacenar la mercadería.';
 
         this.ingresoForm.reset({
+          productoId: 0,
+          cantidad: 1,
+        });
+
+        this.cargarProductos();
+      });
+  }
+
+  solicitarPreparacion(): void {
+    this.mensaje = '';
+    this.error = '';
+
+    if (this.preparacionForm.invalid) {
+      this.error = 'Completá el producto y una cantidad válida.';
+      return;
+    }
+
+    const productoId = Number(this.preparacionForm.value.productoId);
+    const cantidad = Number(this.preparacionForm.value.cantidad);
+
+    const producto = this.productos.find(p => p.id === productoId);
+
+    if (!producto) {
+      this.error = 'No se encontró el producto seleccionado.';
+      return;
+    }
+
+    if (producto.estado !== 'almacenado') {
+      this.error = 'El producto ya tiene una tarea pendiente.';
+      return;
+    }
+
+    if (cantidad > producto.stock) {
+      this.error = `No hay suficiente stock. Disponible: ${producto.stock}.`;
+      return;
+    }
+
+    this.productoService
+      .actualizarParcial(producto.id, {
+        estado: 'pendiente_preparar',
+        cantidadPendiente: cantidad,
+      })
+      .subscribe(() => {
+        this.mensaje =
+          'Preparación solicitada. El empleado debe preparar la mercadería.';
+
+        this.preparacionForm.reset({
           productoId: 0,
           cantidad: 1,
         });

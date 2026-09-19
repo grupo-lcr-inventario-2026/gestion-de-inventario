@@ -1,4 +1,211 @@
 <section class="container py-4">
-    <h2>Empleados</h2>
-    <p class="text-muted">En construcción.</p>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2>Empleados</h2>
+      <p class="text-muted mb-0">
+        Gestión de los empleados del sistema.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="nuevoEmpleado()"
+    >
+      Nuevo empleado
+    </button>
+  </div>
+
+  @if (mensaje) {
+    <div class="alert alert-success" role="alert">
+      {{ mensaje }}
+    </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger" role="alert">
+      {{ error }}
+    </div>
+  }
+
+  @if (mostrarFormulario) {
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3 class="h5">
+          {{ editandoId === null ? 'Nuevo empleado' : 'Editar empleado' }}
+        </h3>
+
+        <form [formGroup]="empleadoForm" (ngSubmit)="guardarEmpleado()">
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="nombre" class="form-label">
+                Nombre
+              </label>
+
+              <input
+                id="nombre"
+                type="text"
+                class="form-control"
+                formControlName="nombre"
+              />
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="apellido" class="form-label">
+                Apellido
+              </label>
+
+              <input
+                id="apellido"
+                type="text"
+                class="form-control"
+                formControlName="apellido"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email" class="form-label">
+                Email
+              </label>
+
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                formControlName="email"
+              />
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="password" class="form-label">
+                Contraseña
+              </label>
+
+              <input
+                id="password"
+                type="password"
+                class="form-control"
+                formControlName="password"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check">
+              <input
+                id="activo"
+                type="checkbox"
+                class="form-check-input"
+                formControlName="activo"
+              />
+
+              <label
+                for="activo"
+                class="form-check-label"
+              >
+                Empleado activo
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-success me-2"
+          >
+            {{ editandoId === null ? 'Dar de alta' : 'Guardar cambios' }}
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="limpiarFormulario()"
+          >
+            Cancelar
+          </button>
+
+        </form>
+      </div>
+    </div>
+  }
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+
+      <thead>
+        <tr>
+          <th>Empleado</th>
+          <th>Email</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (usuario of usuarios; track usuario.id) {
+
+          <tr>
+            <td>
+              {{ usuario.nombre }} {{ usuario.apellido }}
+            </td>
+
+            <td>
+              {{ usuario.email }}
+            </td>
+
+            <td>
+              @if (usuario.activo) {
+                <span class="badge text-bg-success">
+                  Activo
+                </span>
+              } @else {
+                <span class="badge text-bg-secondary">
+                  Inactivo
+                </span>
+              }
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary me-2"
+                (click)="editarEmpleado(usuario)"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-sm"
+                [class.btn-outline-danger]="usuario.activo"
+                [class.btn-outline-success]="!usuario.activo"
+                (click)="cambiarEstado(usuario)"
+              >
+                {{ usuario.activo ? 'Dar de baja' : 'Dar de alta' }}
+              </button>
+            </td>
+          </tr>
+
+        }
+
+        @if (usuarios.length === 0) {
+
+          <tr>
+            <td
+              colspan="4"
+              class="text-center text-muted"
+            >
+              No hay empleados registrados.
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+  </div>
 </section>

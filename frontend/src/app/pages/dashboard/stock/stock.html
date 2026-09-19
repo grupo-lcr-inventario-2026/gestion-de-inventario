@@ -21,6 +21,7 @@
   <div class="card mb-4">
     <div class="card-body">
       <h3 class="h5">Registrar ingreso de mercadería</h3>
+
       <p class="text-muted">
         Registrá la cantidad que ingresó al depósito. El empleado deberá
         almacenarla antes de que se actualice el stock.
@@ -28,7 +29,9 @@
 
       <form [formGroup]="ingresoForm" (ngSubmit)="registrarIngreso()">
         <div class="mb-3">
-          <label for="productoIngreso" class="form-label">Producto</label>
+          <label for="productoIngreso" class="form-label">
+            Producto
+          </label>
 
           <select
             id="productoIngreso"
@@ -46,7 +49,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="cantidadIngreso" class="form-label">Cantidad</label>
+          <label for="cantidadIngreso" class="form-label">
+            Cantidad
+          </label>
 
           <input
             id="cantidadIngreso"
@@ -59,6 +64,60 @@
 
         <button type="submit" class="btn btn-primary">
           Registrar ingreso
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="h5">Solicitar preparación de mercadería</h3>
+
+      <p class="text-muted">
+        Indicá qué producto y cantidad necesita preparar el empleado.
+        El stock se descontará cuando el empleado confirme la preparación.
+      </p>
+
+      <form
+        [formGroup]="preparacionForm"
+        (ngSubmit)="solicitarPreparacion()"
+      >
+        <div class="mb-3">
+          <label for="productoPreparacion" class="form-label">
+            Producto
+          </label>
+
+          <select
+            id="productoPreparacion"
+            class="form-select"
+            formControlName="productoId"
+          >
+            <option [value]="0">Seleccionar producto</option>
+
+            @for (producto of productos; track producto.id) {
+              <option [value]="producto.id">
+                {{ producto.nombre }} — Stock: {{ producto.stock }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="cantidadPreparacion" class="form-label">
+            Cantidad
+          </label>
+
+          <input
+            id="cantidadPreparacion"
+            type="number"
+            class="form-control"
+            formControlName="cantidad"
+            min="1"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Solicitar preparación
         </button>
       </form>
     </div>

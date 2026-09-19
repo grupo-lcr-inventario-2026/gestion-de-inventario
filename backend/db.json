@@ -17,13 +17,43 @@
       "password": "empleado123",
       "rol": "empleado",
       "activo": true
+    },
+    {
+      "nombre": "Carolina",
+      "apellido": "Lanfranco",
+      "email": "carolina_lanfranco@hotmail.com",
+      "password": "caro123",
+      "rol": "admin",
+      "activo": true,
+      "id": 3
+    },
+    {
+      "nombre": "jesica",
+      "apellido": "roldan",
+      "email": "jesi@gmail.com",
+      "password": "jesi123",
+      "rol": "empleado",
+      "activo": true,
+      "id": 4
     }
   ],
   "categorias": [
-    { "id": 1, "nombre": "Impresoras 3D" },
-    { "id": 2, "nombre": "Filamentos" },
-    { "id": 3, "nombre": "Resinas" },
-    { "id": 4, "nombre": "Repuestos" }
+    {
+      "id": 1,
+      "nombre": "Impresoras 3D"
+    },
+    {
+      "id": 2,
+      "nombre": "Filamentos"
+    },
+    {
+      "id": 3,
+      "nombre": "Resinas"
+    },
+    {
+      "id": 4,
+      "nombre": "Repuestos"
+    }
   ],
   "productos": [
     {

@@ -32,13 +32,19 @@ export class Login {
 
     const email = this.form.value.email;
     const password = this.form.value.password;
-    const exito = this.authService.login(email, password);
 
-    if (exito) {
-      this.error = false;
-      this.router.navigateByUrl('/dashboard');
-    } else {
-      this.error = true;
-    }
+    this.authService.login(email, password).subscribe({
+      next: exito => {
+        if (exito) {
+          this.error = false;
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          this.error = true;
+        }
+      },
+      error: () => {
+        this.error = true;
+      },
+    });
   }
 }
