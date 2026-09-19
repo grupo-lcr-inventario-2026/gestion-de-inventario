@@ -1,4 +1,51 @@
 <section class="card shadow-sm p-3 p-md-4">
     <h2 class="card__title">Contacto</h2>
-    <p class="card__text">En construcción.</p>
+
+    <form [formGroup]="formulario" (ngSubmit)="enviar()">
+
+        <div class="mb-3">
+            <label for="empresa" class="form-label">Empresa</label>
+            <input
+                type="text"
+                id="empresa"
+                class="form-control"
+                formControlName="empresa"
+                placeholder="Nombre de la empresa">
+        </div>
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                formControlName="nombre"
+                placeholder="Tu nombre">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="tu@email.com">
+        </div>
+
+        <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea
+                id="mensaje"
+                class="form-control"
+                rows="5"
+                formControlName="mensaje"
+                placeholder="Escribí tu mensaje"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Enviar mensaje
+        </button>
+
+    </form>
 </section>
