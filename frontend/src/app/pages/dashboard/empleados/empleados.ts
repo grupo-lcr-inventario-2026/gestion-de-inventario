@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 import { Usuario } from '../../../core/models/usuario.model';
 import { UsuarioService } from '../../../core/usuario.service';
@@ -13,177 +18,157 @@ import { UsuarioService } from '../../../core/usuario.service';
 export class Empleados implements OnInit {
   usuarios: Usuario[] = [];
 
-  mensaje = '';
-  error = '';
-  cargando = true;
+  formularioEmpleado: FormGroup;
 
-  editandoId: number | null = null;
   mostrarFormulario = false;
+  empleadoEditando: Usuario | null = null;
 
-  empleadoForm;
+  errorConexion = false;
 
   constructor(
     private usuarioService: UsuarioService,
     private formBuilder: FormBuilder,
+    private cambios: ChangeDetectorRef,
   ) {
-    this.empleadoForm = this.formBuilder.group({
+    this.formularioEmpleado = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      activo: [true],
     });
   }
 
   ngOnInit(): void {
-    console.log('EMPLEADOS: componente iniciado');
-    this.cargarUsuarios();
+    this.cargarEmpleados();
   }
 
-  cargarUsuarios(): void {
-    console.log('EMPLEADOS: solicitando usuarios');
-
-    this.cargando = true;
-    this.error = '';
-
+  cargarEmpleados(): void {
     this.usuarioService.obtenerTodos().subscribe({
       next: usuarios => {
-        console.log('EMPLEADOS: usuarios recibidos:', usuarios);
-
         this.usuarios = usuarios.filter(
           usuario => usuario.rol === 'empleado'
         );
 
-        console.log(
-          'EMPLEADOS: cantidad de empleados:',
-          this.usuarios.length
-        );
+        this.errorConexion = false;
 
-        this.cargando = false;
+        this.cambios.markForCheck();
       },
-      error: error => {
-        console.error('EMPLEADOS: error:', error);
 
-        this.cargando = false;
-        this.error = 'No se pudieron cargar los empleados.';
+      error: () => {
+        this.errorConexion = true;
+
+        this.cambios.markForCheck();
       },
-    });
-  }
-
-  nuevoEmpleado(): void {
-    this.mensaje = '';
-    this.error = '';
-    this.editandoId = null;
-    this.mostrarFormulario = true;
-
-    this.empleadoForm.reset({
-      nombre: '',
-      apellido: '',
-      email: '',
-      password: '',
-      activo: true,
     });
   }
 
   guardarEmpleado(): void {
-    this.mensaje = '';
-    this.error = '';
-
-    if (this.empleadoForm.invalid) {
-      this.empleadoForm.markAllAsTouched();
-      this.error = 'Completá correctamente todos los campos.';
+    if (this.formularioEmpleado.invalid) {
+      this.formularioEmpleado.markAllAsTouched();
       return;
     }
 
-    const datos = {
-      nombre: this.empleadoForm.value.nombre ?? '',
-      apellido: this.empleadoForm.value.apellido ?? '',
-      email: this.empleadoForm.value.email ?? '',
-      password: this.empleadoForm.value.password ?? '',
-      rol: 'empleado' as const,
-      activo: this.empleadoForm.value.activo ?? true,
-    };
+    const {
+      nombre,
+      apellido,
+      email,
+      password,
+    } = this.formularioEmpleado.value;
 
-    if (this.editandoId === null) {
-      this.usuarioService.agregar(datos).subscribe({
-        next: () => {
-          this.mensaje = 'Empleado dado de alta correctamente.';
-          this.limpiarFormulario();
-          this.cargarUsuarios();
-        },
-        error: () => {
-          this.error = 'No se pudo dar de alta el empleado.';
-        },
-      });
+    if (this.empleadoEditando) {
+      const empleadoEditado = {
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        password: password,
+        rol: 'empleado' as const,
+        activo: this.empleadoEditando.activo,
+      };
+
+      this.usuarioService
+        .editar(this.empleadoEditando.id, empleadoEditado)
+        .subscribe({
+          next: () => {
+            this.cargarEmpleados();
+            this.cancelarFormulario();
+          },
+          error: () => {
+            this.errorConexion = true;
+            this.cambios.markForCheck();
+          },
+        });
     } else {
-      this.usuarioService.editar(this.editandoId, datos).subscribe({
+      const empleadoNuevo = {
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        password: password,
+        rol: 'empleado' as const,
+        activo: true,
+      };
+
+      this.usuarioService.agregar(empleadoNuevo).subscribe({
         next: () => {
-          this.mensaje = 'Empleado actualizado correctamente.';
-          this.limpiarFormulario();
-          this.cargarUsuarios();
+          this.cargarEmpleados();
+          this.cancelarFormulario();
         },
         error: () => {
-          this.error = 'No se pudo actualizar el empleado.';
+          this.errorConexion = true;
+          this.cambios.markForCheck();
         },
       });
     }
   }
 
   editarEmpleado(usuario: Usuario): void {
-    this.mensaje = '';
-    this.error = '';
-
-    this.editandoId = usuario.id;
+    this.empleadoEditando = usuario;
     this.mostrarFormulario = true;
 
-    this.empleadoForm.patchValue({
+    this.formularioEmpleado.patchValue({
       nombre: usuario.nombre,
       apellido: usuario.apellido,
       email: usuario.email,
       password: usuario.password,
-      activo: usuario.activo,
     });
   }
 
   cambiarEstado(usuario: Usuario): void {
-    this.mensaje = '';
-    this.error = '';
-
     const nuevoEstado = !usuario.activo;
-    const accion = nuevoEstado ? 'dar de alta' : 'dar de baja';
 
-    const confirmar = window.confirm(
-      `¿Querés ${accion} a ${usuario.nombre} ${usuario.apellido}?`,
+    const accion = nuevoEstado
+      ? 'dar de alta'
+      : 'dar de baja';
+
+    const confirmar = confirm(
+      `¿Está seguro de ${accion} a ${usuario.nombre} ${usuario.apellido}?`
     );
 
     if (!confirmar) {
       return;
     }
 
-    this.usuarioService.actualizarEstado(usuario.id, nuevoEstado).subscribe({
-      next: () => {
-        this.mensaje = nuevoEstado
-          ? 'Empleado dado de alta correctamente.'
-          : 'Empleado dado de baja correctamente.';
-
-        this.cargarUsuarios();
-      },
-      error: () => {
-        this.error = 'No se pudo modificar el estado del empleado.';
-      },
-    });
+    this.usuarioService
+      .actualizarEstado(usuario.id, nuevoEstado)
+      .subscribe({
+        next: () => {
+          this.cargarEmpleados();
+        },
+        error: () => {
+          this.errorConexion = true;
+          this.cambios.markForCheck();
+        },
+      });
   }
 
-  limpiarFormulario(): void {
-    this.editandoId = null;
+  cancelarFormulario(): void {
     this.mostrarFormulario = false;
+    this.empleadoEditando = null;
 
-    this.empleadoForm.reset({
+    this.formularioEmpleado.reset({
       nombre: '',
       apellido: '',
       email: '',
       password: '',
-      activo: true,
     });
   }
 }
