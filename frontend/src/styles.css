@@ -98,6 +98,9 @@ body {
 .main {
     flex: 1;
     display: grid;
+    /* minmax(0, 1fr): deja que la columna se achique en celular; sin esto las tablas
+       anchas estiran toda la pagina. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     padding: 1rem 0 1.5rem;
 }
@@ -152,7 +155,9 @@ body {
     border: 1px solid #dee2e6;
     border-radius: .5rem;
     background: #fff;
-    overflow: hidden;
+    /* auto (no hidden): en celular la tabla scrollea de costado adentro de la cajita
+       en vez de estirar toda la pagina. */
+    overflow-x: auto;
 }
 
 .table {
