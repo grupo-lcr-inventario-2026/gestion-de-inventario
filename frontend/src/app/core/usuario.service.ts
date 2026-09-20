@@ -17,6 +17,11 @@ export class UsuarioService {
     return this.http.get<Usuario[]>(this.url);
   }
 
+  // json-server filtra con ?email=... y devuelve un array (vacio si no existe).
+  buscarPorEmail(email: string): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.url, { params: { email } });
+  }
+
   agregar(usuario: Omit<Usuario, 'id'>): Observable<Usuario> {
     return this.http.post<Usuario>(this.url, usuario);
   }
