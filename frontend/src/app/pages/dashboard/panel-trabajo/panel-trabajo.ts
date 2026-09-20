@@ -15,7 +15,7 @@ export class PanelTrabajoComponent implements OnInit {
   pendientesAlmacenar: Producto[] = [];
   pendientesPreparar: Producto[] = [];
 
-  // Alias para que coincida con lo que pusiste en tu HTML
+ 
   get productosAAlmacenar(): Producto[] {
     return this.pendientesAlmacenar;
   }
@@ -41,7 +41,7 @@ export class PanelTrabajoComponent implements OnInit {
     });
   }
 
-  // Cuando presionas "Listo" / "Marcar almacenado"
+  
   marcarAlmacenado(producto: Producto): void {
     const nuevoStock = producto.stock + producto.cantidadPendiente;
 
@@ -51,10 +51,10 @@ export class PanelTrabajoComponent implements OnInit {
       cantidadPendiente: 0
     };
 
-    // 1. Actualiza el producto en db.json
+    
     this.productoService.actualizarParcial(producto.id, cambioProducto).subscribe(() => {
       
-      // 2. RECIÉN AHORA registra el movimiento
+    
       const nuevoMovimiento = {
         productoId: producto.id,
         tipo: 'ingreso' as const,
@@ -64,12 +64,12 @@ export class PanelTrabajoComponent implements OnInit {
       };
 
       this.movimientoService.registrar(nuevoMovimiento).subscribe(() => {
-        this.cargarTareas(); // Recarga las tablas
+        this.cargarTareas(); 
       });
     });
   }
 
-  // Cuando presionas "Listo" / "Marcar preparado"
+  
   marcarPreparado(producto: Producto): void {
     const nuevoStock = producto.stock - producto.cantidadPendiente;
 
@@ -79,10 +79,10 @@ export class PanelTrabajoComponent implements OnInit {
       cantidadPendiente: 0
     };
 
-    // 1. Actualiza el producto en db.json
+    
     this.productoService.actualizarParcial(producto.id, cambioProducto).subscribe(() => {
 
-      // 2. RECIÉN AHORA registra el movimiento
+      
       const nuevoMovimiento = {
         productoId: producto.id,
         tipo: 'preparacion' as const,
@@ -92,7 +92,7 @@ export class PanelTrabajoComponent implements OnInit {
       };
 
       this.movimientoService.registrar(nuevoMovimiento).subscribe(() => {
-        this.cargarTareas(); // Recarga las tablas
+        this.cargarTareas(); 
       });
     });
   }
