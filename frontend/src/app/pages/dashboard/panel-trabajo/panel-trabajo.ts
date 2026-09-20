@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductoService } from '../../../core/producto.service';
 import { MovimientoService } from '../../../core/movimiento.service';
@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { Producto } from '../../../core/models/producto.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   selector: 'app-panel-trabajo',
   standalone: true,
   imports: [CommonModule],

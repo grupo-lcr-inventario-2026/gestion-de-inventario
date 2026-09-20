@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { CategoriaService } from '../../../core/categoria.service';
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ReactiveFormsModule, FormsModule, NgClass],
   selector: 'app-productos',
   styles: ``,

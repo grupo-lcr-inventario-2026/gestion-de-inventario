@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink, RouterLinkActive],
   selector: 'app-navbar-dashboard',
   styles: ``,

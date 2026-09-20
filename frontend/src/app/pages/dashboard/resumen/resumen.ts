@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ProductoService } from '../../../core/producto.service';
@@ -6,6 +6,7 @@ import { MovimientoService } from '../../../core/movimiento.service';
 import { Usuario } from '../../../core/models/usuario.model';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   selector: 'app-resumen',
   standalone: true,
   imports: [CommonModule],

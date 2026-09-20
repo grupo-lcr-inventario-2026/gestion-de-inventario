@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink, RouterLinkActive],
   selector: 'app-navbar-publica',
   styles: ``,

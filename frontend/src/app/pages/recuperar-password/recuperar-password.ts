@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ReactiveFormsModule],
   selector: 'app-recuperar-password',
   styles: ``,

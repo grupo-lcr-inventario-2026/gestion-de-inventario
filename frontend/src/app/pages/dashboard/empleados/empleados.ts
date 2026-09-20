@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,6 +10,7 @@ import { Usuario } from '../../../core/models/usuario.model';
 import { UsuarioService } from '../../../core/usuario.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ReactiveFormsModule],
   selector: 'app-empleados',
   styles: ``,
