@@ -10,8 +10,8 @@ import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
 import { RecuperarPassword } from './pages/recuperar-password/recuperar-password';
 import { Productos } from './pages/dashboard/productos/productos';
-import { PanelTrabajo } from './pages/dashboard/panel-trabajo/panel-trabajo';
-import { Resumen } from './pages/dashboard/resumen/resumen';
+import { PanelTrabajoComponent } from './pages/dashboard/panel-trabajo/panel-trabajo';
+import { ResumenComponent } from './pages/dashboard/resumen/resumen';
 import { Stock } from './pages/dashboard/stock/stock';
 import { Empleados } from './pages/dashboard/empleados/empleados';
 import { NotFound } from './pages/not-found/not-found';
@@ -37,9 +37,10 @@ export const routes: Routes = [
       { path: '', redirectTo: 'productos', pathMatch: 'full' },
       // Para ambos roles
       { path: 'productos', component: Productos },
-      { path: 'panel', component: PanelTrabajo },
+      { path: 'panel', component: PanelTrabajoComponent },
+     
       // Solo administrador
-      { path: 'resumen', component: Resumen, canActivate: [adminGuard] },
+      { path: 'resumen', component: ResumenComponent, canActivate: [adminGuard] },
       { path: 'stock', component: Stock, canActivate: [adminGuard] },
       { path: 'empleados', component: Empleados, canActivate: [adminGuard] },
     ],
