@@ -56,7 +56,11 @@ body {
     outline-offset: 2px;
 }
 
-.nav__link.active {
+/* Pestaña activa: fondo azul y letra blanca en las dos barras (pública y dashboard).
+   La regla larga es para ganarle a la que trae Bootstrap con .navbar-nav .nav-link.active */
+.nav__link.active,
+.navbar-nav .nav-link.nav__link.active,
+.navbar-light .navbar-nav .nav-link.nav__link.active {
     background: #1d4ed8;
     color: #fff;
 }

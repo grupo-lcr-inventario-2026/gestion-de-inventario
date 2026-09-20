@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -9,6 +9,7 @@ import { Producto } from '../../../core/models/producto.model';
 import { ProductoService } from '../../../core/producto.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ReactiveFormsModule],
   selector: 'app-stock',
   styles: ``,

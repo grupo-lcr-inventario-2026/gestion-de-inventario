@@ -1,6 +1,8 @@
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import { authGuard } from './core/auth/auth.guard';
 import { adminGuard } from './core/auth/admin.guard';
+import { AuthService } from './core/auth/auth.service';
 import { PublicLayout } from './layout/public-layout/public-layout';
 import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 import { Home } from './pages/home/home';
@@ -34,7 +36,12 @@ export const routes: Routes = [
     component: DashboardLayout,
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'productos', pathMatch: 'full' },
+      // Pantalla inicial segun el rol: admin -> resumen, empleado -> panel
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: () => (inject(AuthService).rolActual() === 'admin' ? 'resumen' : 'panel'),
+      },
       // Para ambos roles
       { path: 'productos', component: Productos },
       { path: 'panel', component: PanelTrabajoComponent },
