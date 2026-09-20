@@ -9,7 +9,6 @@ import { Home } from './pages/home/home';
 import { QuienesSomos } from './pages/quienes-somos/quienes-somos';
 import { Contacto } from './pages/contacto/contacto';
 import { Login } from './pages/login/login';
-import { Registro } from './pages/registro/registro';
 import { RecuperarPassword } from './pages/recuperar-password/recuperar-password';
 import { Productos } from './pages/dashboard/productos/productos';
 import { PanelTrabajoComponent } from './pages/dashboard/panel-trabajo/panel-trabajo';
@@ -27,7 +26,6 @@ export const routes: Routes = [
       { path: 'quienes-somos', component: QuienesSomos },
       { path: 'contacto', component: Contacto },
       { path: 'login', component: Login },
-      { path: 'registro', component: Registro },
       { path: 'recuperar-password', component: RecuperarPassword },
     ],
   },

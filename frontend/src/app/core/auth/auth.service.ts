@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, of, switchMap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Rol, Usuario } from '../models/usuario.model';
 import { UsuarioService } from '../usuario.service';
 
@@ -37,38 +37,6 @@ export class AuthService {
         );
 
         return true;
-      })
-    );
-  }
-
-  registrar(
-    nombre: string,
-    apellido: string,
-    email: string,
-    password: string
-  ): Observable<boolean> {
-    return this.usuarioService.obtenerTodos().pipe(
-      switchMap(usuarios => {
-        const existe = usuarios.some(
-          usuario => usuario.email === email
-        );
-
-        if (existe) {
-          return of(false);
-        }
-
-        const nuevoUsuario: Omit<Usuario, 'id'> = {
-          nombre,
-          apellido,
-          email,
-          password,
-          rol: 'empleado',
-          activo: true,
-        };
-
-        return this.usuarioService.agregar(nuevoUsuario).pipe(
-          map(() => true)
-        );
       })
     );
   }
