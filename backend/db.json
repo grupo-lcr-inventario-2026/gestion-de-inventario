@@ -146,6 +146,56 @@
       "cantidadPendiente": 0
     }
   ],
-  "movimientos": [],
-  "contactos": []
+  "movimientos": [
+    {
+      "id": 1,
+      "productoId": 3,
+      "tipo": "ingreso",
+      "cantidad": 10,
+      "fecha": "2026-09-15T10:30:00.000Z",
+      "usuarioId": 2
+    },
+    {
+      "id": 2,
+      "productoId": 7,
+      "tipo": "ingreso",
+      "cantidad": 20,
+      "fecha": "2026-09-16T09:15:00.000Z",
+      "usuarioId": 4
+    },
+    {
+      "id": 3,
+      "productoId": 4,
+      "tipo": "preparacion",
+      "cantidad": 2,
+      "fecha": "2026-09-17T14:00:00.000Z",
+      "usuarioId": 2
+    },
+    {
+      "id": 4,
+      "productoId": 5,
+      "tipo": "preparacion",
+      "cantidad": 3,
+      "fecha": "2026-09-18T11:45:00.000Z",
+      "usuarioId": 4
+    }
+  ],
+  "contactos": [
+    {
+      "id": 1,
+      "empresa": "Estudio Nova",
+      "nombre": "Lucia Perez",
+      "email": "lucia@estudionova.com",
+      "mensaje": "Quisiera saber si tienen stock de filamento PETG para un pedido grande.",
+      "fecha": "2026-09-16T16:20:00.000Z"
+    },
+    {
+      "id": 2,
+      "empresa": "Taller Maker",
+      "nombre": "Diego Sosa",
+      "email": "diego@tallermaker.com",
+      "mensaje": "Necesito presupuesto por dos impresoras y repuestos.",
+      "fecha": "2026-09-18T09:05:00.000Z"
+    }
+  ]
 }
