@@ -15,7 +15,7 @@ export class PanelTrabajoComponent implements OnInit {
   pendientesAlmacenar: Producto[] = [];
   pendientesPreparar: Producto[] = [];
 
- 
+  
   get productosAAlmacenar(): Producto[] {
     return this.pendientesAlmacenar;
   }
@@ -34,16 +34,29 @@ export class PanelTrabajoComponent implements OnInit {
     this.cargarTareas();
   }
 
+  
   cargarTareas(): void {
     this.productoService.obtenerTodos().subscribe((productos) => {
-      this.pendientesAlmacenar = productos.filter(p => p.estado === 'pendiente_almacenar');
-      this.pendientesPreparar = productos.filter(p => p.estado === 'pendiente_preparar');
+      
+      this.pendientesAlmacenar = productos.filter(p => 
+        p.estado === 'pendiente_almacenar' || 
+        
+        (p.cantidadPendiente > 0 && p.estado?.includes('almacenar'))
+      );
+
+     
+      this.pendientesPreparar = productos.filter(p => 
+        p.estado === 'pendiente_preparar' || 
+        
+        (p.cantidadPendiente > 0 && p.estado?.includes('preparar'))
+      );
     });
   }
 
-  
+ 
   marcarAlmacenado(producto: Producto): void {
-    const nuevoStock = producto.stock + producto.cantidadPendiente;
+    const cantidad = producto.cantidadPendiente || 0;
+    const nuevoStock = producto.stock + cantidad;
 
     const cambioProducto: Partial<Producto> = {
       stock: nuevoStock,
@@ -54,11 +67,11 @@ export class PanelTrabajoComponent implements OnInit {
     
     this.productoService.actualizarParcial(producto.id, cambioProducto).subscribe(() => {
       
-    
+      
       const nuevoMovimiento = {
         productoId: producto.id,
         tipo: 'ingreso' as const,
-        cantidad: producto.cantidadPendiente,
+        cantidad: cantidad,
         fecha: new Date().toISOString(),
         usuarioId: this.authService.usuario()?.id || 1
       };
@@ -69,9 +82,10 @@ export class PanelTrabajoComponent implements OnInit {
     });
   }
 
-  
+ 
   marcarPreparado(producto: Producto): void {
-    const nuevoStock = producto.stock - producto.cantidadPendiente;
+    const cantidad = producto.cantidadPendiente || 0;
+    const nuevoStock = producto.stock - cantidad;
 
     const cambioProducto: Partial<Producto> = {
       stock: nuevoStock,
@@ -82,11 +96,11 @@ export class PanelTrabajoComponent implements OnInit {
     
     this.productoService.actualizarParcial(producto.id, cambioProducto).subscribe(() => {
 
-      
+     
       const nuevoMovimiento = {
         productoId: producto.id,
         tipo: 'preparacion' as const,
-        cantidad: producto.cantidadPendiente,
+        cantidad: cantidad,
         fecha: new Date().toISOString(),
         usuarioId: this.authService.usuario()?.id || 1
       };
