@@ -1,90 +1,236 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StockService } from '../../../core/stock.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+import { Producto } from '../../../core/models/producto.model';
+import { ProductoService } from '../../../core/producto.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [ReactiveFormsModule],
   selector: 'app-stock',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  styles: ``,
   templateUrl: './stock.html',
 })
 export class Stock implements OnInit {
-  private fb = inject(FormBuilder);
-  private stockService = inject(StockService);
+  productos: Producto[] = [];
 
-  productos: any[] = [];
-  productoSeleccionado: any = null;
+  ingresoForm;
+  preparacionForm;
 
-  // Sumamos el campo 'nombre' como editable para los productos nuevos
-  stockForm: FormGroup = this.fb.group({
-    productoId: [''],
-    productoNombre: ['', Validators.required],
-    cantidad: ['', [Validators.required, Validators.min(0)]],
-  });
+  mostrarIngreso = false;
+  mostrarPreparacion = false;
+
+  mensaje = '';
+  error = '';
+  errorConexion = false;
+
+  constructor(
+    private productoService: ProductoService,
+    private formBuilder: FormBuilder,
+    private cambios: ChangeDetectorRef,
+  ) {
+    this.ingresoForm = this.formBuilder.group({
+      productoId: [0, Validators.required],
+      cantidad: [1, [Validators.required, Validators.min(1)]],
+    });
+
+    this.preparacionForm = this.formBuilder.group({
+      productoId: [0, Validators.required],
+      cantidad: [1, [Validators.required, Validators.min(1)]],
+    });
+  }
 
   ngOnInit(): void {
     this.cargarProductos();
   }
 
   cargarProductos(): void {
-    const servicio = this.stockService as any;
+    this.productoService.obtenerTodos().subscribe({
+      next: productos => {
+        this.productos = productos;
+        this.errorConexion = false;
 
-    if (servicio.obtenerProductos) {
-      this.productos = servicio.obtenerProductos();
-    } else if (servicio.getProductos) {
-      this.productos = servicio.getProductos();
-    } else if (servicio.productos) {
-      this.productos = servicio.productos;
-    }
-  }
+        this.cambios.markForCheck();
+      },
 
-  seleccionarProducto(producto: any): void {
-    this.productoSeleccionado = producto;
-    this.stockForm.patchValue({
-      productoId: producto.id,
-      productoNombre: producto.nombre,
-      cantidad: producto.cantidad,
+      error: () => {
+        this.errorConexion = true;
+
+        this.cambios.markForCheck();
+      },
     });
   }
 
-  // Cancela la selección para poder ingresar un producto nuevo
-  limpiarSeleccion(): void {
-    this.productoSeleccionado = null;
-    this.stockForm.reset();
+  claseEstado(estado: string): string {
+    if (estado === 'pendiente_almacenar') {
+      return 'bg-warning text-dark';
+    }
+
+    if (estado === 'pendiente_preparar') {
+      return 'bg-primary';
+    }
+
+    return 'bg-success';
   }
 
-  actualizarStock(): void {
-    if (this.stockForm.valid) {
-      const { productoId, productoNombre, cantidad } = this.stockForm.getRawValue();
-      const servicio = this.stockService as any;
-
-      if (this.productoSeleccionado) {
-        // CASO A: Actualizar producto existente
-        if (servicio.actualizarCantidad) {
-          servicio.actualizarCantidad(productoId, cantidad);
-        }
-
-        const prod = this.productos.find(p => p.id === productoId);
-        if (prod) {
-          prod.cantidad = cantidad;
-        }
-      } else {
-        // CASO B: Ingresar producto NUEVO al stock
-        const nuevoProducto = {
-          id: Date.now(),
-          nombre: productoNombre,
-          cantidad: cantidad
-        };
-
-        if (servicio.agregarProducto) {
-          servicio.agregarProducto(nuevoProducto);
-        } else {
-          this.productos.push(nuevoProducto);
-        }
-      }
-
-      this.limpiarSeleccion();
+  obtenerEstado(estado: string): string {
+    if (estado === 'pendiente_almacenar') {
+      return 'Pendiente de almacenar';
     }
+
+    if (estado === 'pendiente_preparar') {
+      return 'Pendiente de preparar';
+    }
+
+    return 'Almacenado';
+  }
+
+  registrarIngreso(): void {
+    this.mensaje = '';
+    this.error = '';
+
+    if (this.ingresoForm.invalid) {
+      this.ingresoForm.markAllAsTouched();
+      this.error = 'Completá el producto y una cantidad válida.';
+      return;
+    }
+
+    const productoId = Number(this.ingresoForm.value.productoId);
+    const cantidad = Number(this.ingresoForm.value.cantidad);
+
+    const producto = this.productos.find(
+      producto => producto.id === productoId
+    );
+
+    if (!producto) {
+      this.error = 'No se encontró el producto seleccionado.';
+      return;
+    }
+
+    if (producto.estado !== 'almacenado') {
+      this.error = 'El producto ya tiene una tarea pendiente.';
+      return;
+    }
+
+    this.productoService
+      .actualizarParcial(producto.id, {
+        estado: 'pendiente_almacenar',
+        cantidadPendiente: cantidad,
+      })
+      .subscribe({
+        next: () => {
+          this.mensaje =
+            'Ingreso registrado. El empleado debe almacenar la mercadería.';
+
+          this.ingresoForm.reset({
+            productoId: 0,
+            cantidad: 1,
+          });
+
+          this.mostrarIngreso = false;
+
+          this.cargarProductos();
+        },
+
+        error: () => {
+          this.errorConexion = true;
+          this.cambios.markForCheck();
+        },
+      });
+  }
+
+  solicitarPreparacion(): void {
+    this.mensaje = '';
+    this.error = '';
+
+    if (this.preparacionForm.invalid) {
+      this.preparacionForm.markAllAsTouched();
+      this.error = 'Completá el producto y una cantidad válida.';
+      return;
+    }
+
+    const productoId = Number(this.preparacionForm.value.productoId);
+    const cantidad = Number(this.preparacionForm.value.cantidad);
+
+    const producto = this.productos.find(
+      producto => producto.id === productoId
+    );
+
+    if (!producto) {
+      this.error = 'No se encontró el producto seleccionado.';
+      return;
+    }
+
+    if (producto.estado !== 'almacenado') {
+      this.error = 'El producto ya tiene una tarea pendiente.';
+      return;
+    }
+
+    if (cantidad > producto.stock) {
+      this.error = `No hay suficiente stock. Disponible: ${producto.stock}.`;
+      return;
+    }
+
+    this.productoService
+      .actualizarParcial(producto.id, {
+        estado: 'pendiente_preparar',
+        cantidadPendiente: cantidad,
+      })
+      .subscribe({
+        next: () => {
+          this.mensaje =
+            'Preparación solicitada. El empleado debe preparar la mercadería.';
+
+          this.preparacionForm.reset({
+            productoId: 0,
+            cantidad: 1,
+          });
+
+          this.mostrarPreparacion = false;
+
+          this.cargarProductos();
+        },
+
+        error: () => {
+          this.errorConexion = true;
+          this.cambios.markForCheck();
+        },
+      });
+  }
+
+  cancelarIngreso(): void {
+    this.mostrarIngreso = false;
+
+    this.ingresoForm.reset({
+      productoId: 0,
+      cantidad: 1,
+    });
+  }
+
+  cancelarPreparacion(): void {
+    this.mostrarPreparacion = false;
+
+    this.preparacionForm.reset({
+      productoId: 0,
+      cantidad: 1,
+    });
+  }
+
+  cambiarFormulario(formulario: 'ingreso' | 'preparacion'): void {
+    this.mensaje = '';
+    this.error = '';
+
+    if (formulario === 'ingreso') {
+      this.mostrarIngreso = !this.mostrarIngreso;
+      this.mostrarPreparacion = false;
+      return;
+    }
+
+    this.mostrarPreparacion = !this.mostrarPreparacion;
+    this.mostrarIngreso = false;
   }
 }

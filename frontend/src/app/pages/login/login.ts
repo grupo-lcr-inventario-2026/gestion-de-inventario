@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ReactiveFormsModule, RouterLink],
   selector: 'app-login',
   styles: ``,
@@ -32,13 +33,25 @@ export class Login {
 
     const email = this.form.value.email;
     const password = this.form.value.password;
-    const exito = this.authService.login(email, password);
 
-    if (exito) {
-      this.error = false;
-      this.router.navigateByUrl('/dashboard');
-    } else {
-      this.error = true;
-    }
+    this.authService.login(email, password).subscribe({
+      next: exito => {
+        if (exito) {
+          this.error = false;
+
+          // Cada rol arranca en su pantalla principal.
+          if (this.authService.rolActual() === 'admin') {
+            this.router.navigateByUrl('/dashboard/resumen');
+          } else {
+            this.router.navigateByUrl('/dashboard/panel');
+          }
+        } else {
+          this.error = true;
+        }
+      },
+      error: () => {
+        this.error = true;
+      },
+    });
   }
 }

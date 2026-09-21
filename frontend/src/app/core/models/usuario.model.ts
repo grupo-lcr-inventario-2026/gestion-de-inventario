@@ -1,4 +1,4 @@
-export type Rol = 'admin' | 'user';
+export type Rol = 'admin' | 'empleado';
 
 export interface Usuario {
   id: number;
@@ -7,4 +7,5 @@ export interface Usuario {
   email: string;
   password: string;
   rol: Rol;
+  activo: boolean;
 }

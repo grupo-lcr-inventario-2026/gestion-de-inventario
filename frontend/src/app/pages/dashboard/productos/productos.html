@@ -1,5 +1,5 @@
 <section class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
     <div>
       <h2>Gestión de Productos</h2>
       <p class="text-muted mb-0">Administración del catálogo de productos.</p>
@@ -11,6 +11,50 @@
       </button>
     }
   </div>
+
+  @if (errorConexion) {
+    <div class="alert alert-danger">
+      No se pudo conectar con el servidor. Verificá que la API esté levantada.
+    </div>
+  }
+
+  @if (esAdministrador) {
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3 class="card-title mb-3">Categorías</h3>
+
+        <div class="input-group mb-3" style="max-width: 400px;">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nombre de la categoría"
+            [(ngModel)]="nombreNuevaCategoria"
+            [ngModelOptions]="{ standalone: true }"
+          />
+
+          <button type="button" class="btn btn-outline-primary" (click)="agregarCategoria()">
+            Agregar
+          </button>
+        </div>
+
+        <ul class="list-group">
+          @for (categoria of categorias; track categoria.id) {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ categoria.nombre }}
+
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="eliminarCategoria(categoria.id)"
+              >
+                Eliminar
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
 
   @if (esAdministrador && mostrarFormulario) {
     <div class="card mb-4">
@@ -48,9 +92,9 @@
             >
               <option value="">Seleccione una categoría</option>
 
-              @for (categoria of categorias; track categoria) {
-                <option [value]="categoria">
-                  {{ categoria }}
+              @for (categoria of categorias; track categoria.id) {
+                <option [value]="categoria.nombre">
+                  {{ categoria.nombre }}
                 </option>
               }
             </select>
@@ -99,6 +143,25 @@
             }
           </div>
 
+          <div class="mb-3">
+            <label for="ubicacion" class="form-label">Ubicación</label>
+
+            <input
+              id="ubicacion"
+              type="text"
+              class="form-control"
+              placeholder="Ej: Estante A1"
+              formControlName="ubicacion"
+            />
+
+            @if (formularioProducto.get('ubicacion')?.invalid &&
+                 formularioProducto.get('ubicacion')?.touched) {
+              <div class="text-danger mt-1">
+                La ubicación es obligatoria.
+              </div>
+            }
+          </div>
+
           <button type="submit" class="btn btn-success">
             {{ productoEditando ? 'Guardar cambios' : 'Guardar producto' }}
           </button>
@@ -122,11 +185,13 @@
         <tr>
           <th>Producto</th>
           <th>Categoría</th>
+          <th>Cantidad</th>
           <th>Precio</th>
-          <th>Stock</th>
-          <th>Estado</th>
+          <th>Ubicación</th>
 
           @if (esAdministrador) {
+            <th>Disponibilidad</th>
+            <th>Estado</th>
             <th>Acciones</th>
           }
         </tr>
@@ -137,11 +202,17 @@
           <tr>
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.categoria }}</td>
-            <td>${{ producto.precio }}</td>
             <td>{{ producto.stock }}</td>
-            <td>{{ obtenerEstado(producto.stock) }}</td>
+            <td>${{ producto.precio }}</td>
+            <td>{{ producto.ubicacion }}</td>
 
             @if (esAdministrador) {
+              <td>
+                <span class="badge" [ngClass]="claseDisponibilidad(producto.stock)">
+                  {{ obtenerDisponibilidad(producto.stock) }}
+                </span>
+              </td>
+              <td>{{ obtenerEstado(producto.estado) }}</td>
               <td>
                 <button
                   type="button"

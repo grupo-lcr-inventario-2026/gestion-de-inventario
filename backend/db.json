@@ -1,0 +1,201 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Ana",
+      "apellido": "Admin",
+      "email": "admin@tp3d.com",
+      "password": "admin123",
+      "rol": "admin",
+      "activo": true
+    },
+    {
+      "id": 2,
+      "nombre": "Uriel",
+      "apellido": "Empleado",
+      "email": "empleado@tp3d.com",
+      "password": "empleado123",
+      "rol": "empleado",
+      "activo": true
+    },
+    {
+      "nombre": "Carolina",
+      "apellido": "Lanfranco",
+      "email": "carolina_lanfranco@hotmail.com",
+      "password": "caro123",
+      "rol": "admin",
+      "activo": true,
+      "id": 3
+    },
+    {
+      "nombre": "jesica",
+      "apellido": "roldan",
+      "email": "jesi@gmail.com",
+      "password": "jesi123",
+      "rol": "empleado",
+      "activo": true,
+      "id": 4
+    },
+    {
+      "nombre": "Julia",
+      "apellido": "Lanfranco",
+      "email": "ju@gmail.com",
+      "password": "ju123",
+      "rol": "empleado",
+      "activo": true,
+      "id": 5
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Impresoras 3D"
+    },
+    {
+      "id": 2,
+      "nombre": "Filamentos"
+    },
+    {
+      "id": 3,
+      "nombre": "Resinas"
+    },
+    {
+      "id": 4,
+      "nombre": "Repuestos"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Impresora Creality Ender-3 V3",
+      "categoria": "Impresoras 3D",
+      "precio": 450000,
+      "stock": 3,
+      "ubicacion": "Estante A1",
+      "estado": "pendiente_almacenar",
+      "cantidadPendiente": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Impresora Bambu Lab A1 mini",
+      "categoria": "Impresoras 3D",
+      "precio": 520000,
+      "stock": 2,
+      "ubicacion": "Estante A2",
+      "estado": "pendiente_almacenar",
+      "cantidadPendiente": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Filamento PLA 1kg Blanco",
+      "categoria": "Filamentos",
+      "precio": 18000,
+      "stock": 25,
+      "ubicacion": "Estante B1",
+      "estado": "pendiente_preparar",
+      "cantidadPendiente": 1
+    },
+    {
+      "id": 4,
+      "nombre": "Filamento PLA 1kg Negro",
+      "categoria": "Filamentos",
+      "precio": 18000,
+      "stock": 8,
+      "ubicacion": "Estante B1",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 5,
+      "nombre": "Filamento PETG 1kg Transparente",
+      "categoria": "Filamentos",
+      "precio": 22000,
+      "stock": 12,
+      "ubicacion": "Estante B2",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    },
+    {
+      "id": 6,
+      "nombre": "Resina estandar 1L Gris",
+      "categoria": "Resinas",
+      "precio": 35000,
+      "stock": 6,
+      "ubicacion": "Estante C1",
+      "estado": "pendiente_preparar",
+      "cantidadPendiente": 1
+    },
+    {
+      "id": 7,
+      "nombre": "Boquilla 0.4mm laton",
+      "categoria": "Repuestos",
+      "precio": 1500,
+      "stock": 40,
+      "ubicacion": "Estante D1",
+      "estado": "pendiente_preparar",
+      "cantidadPendiente": 1
+    },
+    {
+      "id": 8,
+      "nombre": "Cama magnetica PEI 235mm",
+      "categoria": "Repuestos",
+      "precio": 12000,
+      "stock": 0,
+      "ubicacion": "Estante D2",
+      "estado": "almacenado",
+      "cantidadPendiente": 0
+    }
+  ],
+  "movimientos": [
+    {
+      "id": 1,
+      "productoId": 3,
+      "tipo": "ingreso",
+      "cantidad": 10,
+      "fecha": "2026-09-15T10:30:00.000Z",
+      "usuarioId": 2
+    },
+    {
+      "id": 2,
+      "productoId": 7,
+      "tipo": "ingreso",
+      "cantidad": 20,
+      "fecha": "2026-09-16T09:15:00.000Z",
+      "usuarioId": 4
+    },
+    {
+      "id": 3,
+      "productoId": 4,
+      "tipo": "preparacion",
+      "cantidad": 2,
+      "fecha": "2026-09-17T14:00:00.000Z",
+      "usuarioId": 2
+    },
+    {
+      "id": 4,
+      "productoId": 5,
+      "tipo": "preparacion",
+      "cantidad": 3,
+      "fecha": "2026-09-18T11:45:00.000Z",
+      "usuarioId": 4
+    }
+  ],
+  "contactos": [
+    {
+      "id": 1,
+      "empresa": "Estudio Nova",
+      "nombre": "Lucia Perez",
+      "email": "lucia@estudionova.com",
+      "mensaje": "Quisiera saber si tienen stock de filamento PETG para un pedido grande.",
+      "fecha": "2026-09-16T16:20:00.000Z"
+    },
+    {
+      "id": 2,
+      "empresa": "Taller Maker",
+      "nombre": "Diego Sosa",
+      "email": "diego@tallermaker.com",
+      "mensaje": "Necesito presupuesto por dos impresoras y repuestos.",
+      "fecha": "2026-09-18T09:05:00.000Z"
+    }
+  ]
+}

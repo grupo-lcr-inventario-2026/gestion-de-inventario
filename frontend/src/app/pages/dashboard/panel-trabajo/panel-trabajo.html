@@ -1,0 +1,102 @@
+<div class="container-fluid py-4">
+  <div class="row mb-4">
+    <div class="col">
+      <h2 class="h3 fw-bold text-dark">Panel de Trabajo — Depósito</h2>
+      <p class="text-muted">Confirmación de tareas pendientes de almacenamiento y preparación de mercadería.</p>
+    </div>
+  </div>
+
+
+  <div class="card shadow-sm mb-4 border-0">
+    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+      <h5 class="card-title m-0 fw-semibold text-primary">
+        <i class="bi bi-box-seam me-2"></i>Tareas a Almacenar (A almacenar)
+      </h5>
+      <span class="badge bg-primary rounded-pill">{{ productosAAlmacenar.length }}</span>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col" class="ps-3">Producto</th>
+              <th scope="col">Ubicación</th>
+              <th scope="col" class="text-center">Stock Actual</th>
+              <th scope="col" class="text-center">Cant. a Sumar</th>
+              <th scope="col" class="text-end pe-3">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of productosAAlmacenar; track p.id) {
+              <tr>
+                <td class="ps-3 fw-medium">{{ p.nombre }}</td>
+                <td><span class="badge bg-light text-dark border">{{ p.ubicacion }}</span></td>
+                <td class="text-center">{{ p.stock }}</td>
+                <td class="text-center fw-bold text-success">+{{ p.cantidadPendiente }}</td>
+                <td class="text-end pe-3">
+                  <button class="btn btn-sm btn-success px-3" (click)="marcarAlmacenado(p)">
+                    <i class="bi bi-check-lg me-1"></i> Listo
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="text-center py-4 text-muted">
+                  <i class="bi bi-check2-all text-success display-6 d-block mb-2"></i>
+                  No hay tareas pendientes de almacenamiento.
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
+      <h5 class="card-title m-0 fw-semibold text-warning text-darken-2">
+        <i class="bi bi-clipboard-check me-2"></i>Tareas a Preparar (A preparar)
+      </h5>
+      <span class="badge bg-warning text-dark rounded-pill">{{ productosAPreparar.length }}</span>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col" class="ps-3">Producto</th>
+              <th scope="col">Ubicación</th>
+              <th scope="col" class="text-center">Stock Actual</th>
+              <th scope="col" class="text-center">Cant. a Descontar</th>
+              <th scope="col" class="text-end pe-3">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of productosAPreparar; track p.id) {
+              <tr>
+                <td class="ps-3 fw-medium">{{ p.nombre }}</td>
+                <td><span class="badge bg-light text-dark border">{{ p.ubicacion }}</span></td>
+                <td class="text-center">{{ p.stock }}</td>
+                <td class="text-center fw-bold text-danger">-{{ p.cantidadPendiente }}</td>
+                <td class="text-end pe-3">
+                  <button class="btn btn-sm btn-warning px-3" (click)="marcarPreparado(p)">
+                    <i class="bi bi-check-lg me-1"></i> Listo
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="text-center py-4 text-muted">
+                  <i class="bi bi-inbox text-secondary display-6 d-block mb-2"></i>
+                  No hay solicitudes pendientes de preparación.
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -56,7 +56,11 @@ body {
     outline-offset: 2px;
 }
 
-.nav__link.active {
+/* Pestaña activa: fondo azul y letra blanca en las dos barras (pública y dashboard).
+   La regla larga es para ganarle a la que trae Bootstrap con .navbar-nav .nav-link.active */
+.nav__link.active,
+.navbar-nav .nav-link.nav__link.active,
+.navbar-light .navbar-nav .nav-link.nav__link.active {
     background: #1d4ed8;
     color: #fff;
 }
@@ -94,6 +98,9 @@ body {
 .main {
     flex: 1;
     display: grid;
+    /* minmax(0, 1fr): deja que la columna se achique en celular; sin esto las tablas
+       anchas estiran toda la pagina. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     padding: 1rem 0 1.5rem;
 }
@@ -148,7 +155,9 @@ body {
     border: 1px solid #dee2e6;
     border-radius: .5rem;
     background: #fff;
-    overflow: hidden;
+    /* auto (no hidden): en celular la tabla scrollea de costado adentro de la cajita
+       en vez de estirar toda la pagina. */
+    overflow-x: auto;
 }
 
 .table {

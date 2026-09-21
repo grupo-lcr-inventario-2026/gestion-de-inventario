@@ -1,79 +1,311 @@
-<div class="container mt-4">
-  <div class="row g-3">
+<section class="container py-4">
 
-    <!-- TABLA DE PRODUCTOS -->
-    <div class="col-12 col-lg-8">
-      <div class="card p-3 shadow-sm">
-        <h2 class="h4 mb-3">Productos en Existencia</h2>
-
-        <div class="table-responsive">
-          <table class="table table-bordered align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>ID</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let prod of productos">
-                <td>{{ prod.id }}</td>
-                <td>{{ prod.nombre }}</td>
-                <td>
-                  <span class="badge bg-primary fs-6">{{ prod.cantidad }}</span>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-sm btn-outline-primary" (click)="seleccionarProducto(prod)">
-                    Editar
-                  </button>
-                </td>
-              </tr>
-
-              <tr *ngIf="productos.length === 0">
-                <td colspan="4" class="text-center text-muted">No hay productos registrados.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+    <div>
+      <h2>Gestión de Stock</h2>
+      <p class="text-muted mb-0">
+        Administración de ingresos y preparación de mercadería.
+      </p>
     </div>
 
-    <!-- FORMULARIO DE INGRESO / ACTUALIZACIÓN -->
-    <div class="col-12 col-lg-4">
-      <div class="card p-3 shadow-sm">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h2 class="h4 mb-0">
-            {{ productoSeleccionado ? 'Editar Stock' : 'Nuevo Producto' }}
-          </h2>
-          <button *ngIf="productoSeleccionado" type="button" class="btn btn-sm btn-link text-decoration-none" (click)="limpiarSeleccion()">
-            + Nuevo
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        (click)="cambiarFormulario('ingreso')"
+      >
+        {{ mostrarIngreso ? 'Cancelar' : 'Registrar ingreso' }}
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="cambiarFormulario('preparacion')"
+      >
+        {{ mostrarPreparacion ? 'Cancelar' : 'Solicitar preparación' }}
+      </button>
+    </div>
+  </div>
+
+  @if (errorConexion) {
+    <div class="alert alert-danger">
+      No se pudo conectar con el servidor. Verificá que la API esté levantada.
+    </div>
+  }
+
+  @if (mensaje) {
+    <div class="alert alert-success">
+      {{ mensaje }}
+    </div>
+  }
+
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  }
+
+  @if (mostrarIngreso) {
+    <div class="card mb-4">
+      <div class="card-body">
+
+        <h3 class="card-title mb-3">
+          Registrar ingreso de mercadería
+        </h3>
+
+        <p class="text-muted">
+          Registrá la cantidad que ingresó al depósito.
+          El empleado deberá almacenarla antes de que se actualice el stock.
+        </p>
+
+        <form
+          [formGroup]="ingresoForm"
+          (ngSubmit)="registrarIngreso()"
+        >
+
+          <div class="mb-3">
+            <label
+              for="productoIngreso"
+              class="form-label"
+            >
+              Producto
+            </label>
+
+            <select
+              id="productoIngreso"
+              class="form-select"
+              formControlName="productoId"
+            >
+              <option [value]="0">
+                Seleccionar producto
+              </option>
+
+              @for (producto of productos; track producto.id) {
+                <option [value]="producto.id">
+                  {{ producto.nombre }}
+                </option>
+              }
+            </select>
+
+            @if (
+              ingresoForm.get('productoId')?.invalid &&
+              ingresoForm.get('productoId')?.touched
+            ) {
+              <div class="text-danger mt-1">
+                Seleccioná un producto.
+              </div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="cantidadIngreso"
+              class="form-label"
+            >
+              Cantidad
+            </label>
+
+            <input
+              id="cantidadIngreso"
+              type="number"
+              class="form-control"
+              formControlName="cantidad"
+              min="1"
+            />
+
+            @if (
+              ingresoForm.get('cantidad')?.invalid &&
+              ingresoForm.get('cantidad')?.touched
+            ) {
+              <div class="text-danger mt-1">
+                La cantidad debe ser mayor que 0.
+              </div>
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-success"
+          >
+            Registrar ingreso
           </button>
-        </div>
 
-        <form [formGroup]="stockForm" (ngSubmit)="actualizarStock()">
-          
-          <div class="mb-3">
-            <label class="form-label">Nombre del Producto</label>
-            <input type="text" 
-                   class="form-control" 
-                   formControlName="productoNombre" 
-                   placeholder="Ej: Lapicera Negra" 
-                   [readonly]="productoSeleccionado !== null">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Cantidad</label>
-            <input type="number" class="form-control" formControlName="cantidad" placeholder="Ej: 20">
-          </div>
-
-          <button type="submit" class="btn btn-primary w-100" [disabled]="stockForm.invalid">
-            {{ productoSeleccionado ? 'Guardar Cambios' : 'Ingresar Producto' }}
+          <button
+            type="button"
+            class="btn btn-secondary ms-2"
+            (click)="cancelarIngreso()"
+          >
+            Cancelar
           </button>
 
         </form>
       </div>
     </div>
+  }
 
+  @if (mostrarPreparacion) {
+    <div class="card mb-4">
+      <div class="card-body">
+
+        <h3 class="card-title mb-3">
+          Solicitar preparación de mercadería
+        </h3>
+
+        <p class="text-muted">
+          Indicá qué producto y cantidad necesita preparar el empleado.
+          El stock se descontará cuando el empleado confirme la preparación.
+        </p>
+
+        <form
+          [formGroup]="preparacionForm"
+          (ngSubmit)="solicitarPreparacion()"
+        >
+
+          <div class="mb-3">
+            <label
+              for="productoPreparacion"
+              class="form-label"
+            >
+              Producto
+            </label>
+
+            <select
+              id="productoPreparacion"
+              class="form-select"
+              formControlName="productoId"
+            >
+              <option [value]="0">
+                Seleccionar producto
+              </option>
+
+              @for (producto of productos; track producto.id) {
+                <option [value]="producto.id">
+                  {{ producto.nombre }} — Stock: {{ producto.stock }}
+                </option>
+              }
+            </select>
+
+            @if (
+              preparacionForm.get('productoId')?.invalid &&
+              preparacionForm.get('productoId')?.touched
+            ) {
+              <div class="text-danger mt-1">
+                Seleccioná un producto.
+              </div>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="cantidadPreparacion"
+              class="form-label"
+            >
+              Cantidad
+            </label>
+
+            <input
+              id="cantidadPreparacion"
+              type="number"
+              class="form-control"
+              formControlName="cantidad"
+              min="1"
+            />
+
+            @if (
+              preparacionForm.get('cantidad')?.invalid &&
+              preparacionForm.get('cantidad')?.touched
+            ) {
+              <div class="text-danger mt-1">
+                La cantidad debe ser mayor que 0.
+              </div>
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-success"
+          >
+            Solicitar preparación
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary ms-2"
+            (click)="cancelarPreparacion()"
+          >
+            Cancelar
+          </button>
+
+        </form>
+      </div>
+    </div>
+  }
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+
+      <thead class="table-light">
+        <tr>
+          <th>Producto</th>
+          <th>Categoría</th>
+          <th>Stock</th>
+          <th>Ubicación</th>
+          <th>Estado</th>
+          <th>Cantidad pendiente</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (producto of productos; track producto.id) {
+
+          <tr>
+            <td>
+              {{ producto.nombre }}
+            </td>
+
+            <td>
+              {{ producto.categoria }}
+            </td>
+
+            <td>
+              {{ producto.stock }}
+            </td>
+
+            <td>
+              {{ producto.ubicacion }}
+            </td>
+
+            <td>
+              <span
+                class="badge"
+                [class]="claseEstado(producto.estado)"
+              >
+                {{ obtenerEstado(producto.estado) }}
+              </span>
+            </td>
+
+            <td>
+              {{ producto.cantidadPendiente }}
+            </td>
+          </tr>
+
+        }
+
+        @if (productos.length === 0) {
+          <tr>
+            <td
+              colspan="6"
+              class="text-center text-muted"
+            >
+              No hay productos registrados.
+            </td>
+          </tr>
+        }
+
+      </tbody>
+
+    </table>
   </div>
-</div>
+
+</section>
