@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Apps del proyecto
     'usuarios',
     'productos',
+    'resumen',
     # Cada integrante agrega su app aca: 'productos', 'movimientos', 'contactos'
 ]
 
