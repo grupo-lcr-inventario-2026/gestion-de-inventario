@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # Apps del proyecto
     'usuarios',
+    'productos',
     # Cada integrante agrega su app aca: 'productos', 'movimientos', 'contactos'
 ]
 
