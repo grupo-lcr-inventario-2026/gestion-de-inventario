@@ -1,0 +1,26 @@
+[
+  {
+    "model": "usuarios.usuario",
+    "pk": 1,
+    "fields": {
+      "nombre": "Ana",
+      "apellido": "Admin",
+      "email": "admin@tp3d.com",
+      "password": "admin123",
+      "rol": "admin",
+      "activo": true
+    }
+  },
+  {
+    "model": "usuarios.usuario",
+    "pk": 2,
+    "fields": {
+      "nombre": "Uriel",
+      "apellido": "Empleado",
+      "email": "empleado@tp3d.com",
+      "password": "empleado123",
+      "rol": "empleado",
+      "activo": true
+    }
+  }
+]
