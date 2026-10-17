@@ -13,11 +13,17 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
+  // Valida email + contrasena en el backend (POST /api/v1/login).
+  // Devuelve el usuario si son correctos; si no, el backend responde 401.
+  login(email: string, password: string): Observable<Usuario> {
+    return this.http.post<Usuario>(`${API_URL}/login`, { email, password });
+  }
+
   obtenerTodos(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.url);
   }
 
-  // json-server filtra con ?email=... y devuelve un array (vacio si no existe).
+  // Filtra con ?email=... y devuelve un array (vacio si no existe).
   buscarPorEmail(email: string): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.url, { params: { email } });
   }
