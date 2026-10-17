@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { ProductoService } from '../../../core/producto.service';
-import { MovimientoService } from '../../../core/movimiento.service';
-import { Usuario } from '../../../core/models/usuario.model';
+import { ResumenService, Resumen } from '../../../core/resumen.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -17,26 +14,13 @@ export class ResumenComponent implements OnInit {
   totalPendientes: number = 0;
   totalEmpleadosActivos: number = 0;
 
-  constructor(
-    private productoService: ProductoService,
-    private movimientoService: MovimientoService,
-    private http: HttpClient
-  ) {}
+  constructor(private resumenService: ResumenService) {}
 
   ngOnInit(): void {
-   
-    this.movimientoService.obtenerTodos().subscribe((movs) => {
-      this.totalPreparados = movs.filter(m => m.tipo === 'preparacion').length;
-    });
-
-    
-    this.productoService.obtenerTodos().subscribe((prods) => {
-      this.totalPendientes = prods.filter(p => p.estado !== 'almacenado').length;
-    });
-
-    
-    this.http.get<Usuario[]>('http://localhost:3000/usuarios').subscribe((users) => {
-      this.totalEmpleadosActivos = users.filter(u => u.rol === 'empleado' && u.activo).length;
+    this.resumenService.obtener().subscribe((resumen : Resumen)=> {
+      this.totalPreparados = resumen.productosPreparados;
+      this.totalPendientes = resumen.productosPendientes;
+      this.totalEmpleadosActivos = resumen.empleadosActivos;
     });
   }
 }
