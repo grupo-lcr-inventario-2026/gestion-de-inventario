@@ -1,5 +1,7 @@
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ProductoService } from '../../../core/producto.service';
 import { MovimientoService } from '../../../core/movimiento.service';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -13,10 +15,10 @@ import { Producto } from '../../../core/models/producto.model';
   templateUrl: './panel-trabajo.html'
 })
 export class PanelTrabajoComponent implements OnInit {
+
   pendientesAlmacenar: Producto[] = [];
   pendientesPreparar: Producto[] = [];
 
-  
   get productosAAlmacenar(): Producto[] {
     return this.pendientesAlmacenar;
   }
@@ -35,80 +37,83 @@ export class PanelTrabajoComponent implements OnInit {
     this.cargarTareas();
   }
 
-  
   cargarTareas(): void {
-    this.productoService.obtenerTodos().subscribe((productos) => {
-      
-      this.pendientesAlmacenar = productos.filter(p => 
-        p.estado === 'pendiente_almacenar' || 
-        
-        (p.cantidadPendiente > 0 && p.estado?.includes('almacenar'))
-      );
+    this.productoService.obtenerTodos().subscribe({
+      next: (productos) => {
+        this.pendientesAlmacenar = productos.filter(
+          producto =>
+            producto.estado === 'pendiente_almacenar' &&
+            producto.cantidadPendiente > 0
+        );
 
-     
-      this.pendientesPreparar = productos.filter(p => 
-        p.estado === 'pendiente_preparar' || 
-        
-        (p.cantidadPendiente > 0 && p.estado?.includes('preparar'))
-      );
+        this.pendientesPreparar = productos.filter(
+          producto =>
+            producto.estado === 'pendiente_preparar' &&
+            producto.cantidadPendiente > 0
+        );
+      },
+      error: (error) => {
+        console.error('Error al cargar las tareas:', error);
+        alert('No se pudieron cargar las tareas pendientes.');
+      }
     });
   }
 
- 
   marcarAlmacenado(producto: Producto): void {
-    const cantidad = producto.cantidadPendiente || 0;
-    const nuevoStock = producto.stock + cantidad;
+    const usuarioId = this.authService.usuario()?.id;
 
-    const cambioProducto: Partial<Producto> = {
-      stock: nuevoStock,
-      estado: 'almacenado',
-      cantidadPendiente: 0
-    };
+    if (!usuarioId) {
+      alert('No se pudo identificar al usuario que confirma la tarea.');
+      return;
+    }
 
-    
-    this.productoService.actualizarParcial(producto.id, cambioProducto).subscribe(() => {
-      
-      
-      const nuevoMovimiento = {
-        productoId: producto.id,
-        tipo: 'ingreso' as const,
-        cantidad: cantidad,
-        fecha: new Date().toISOString(),
-        usuarioId: this.authService.usuario()?.id || 1
-      };
+    this.movimientoService.confirmar({
+      productoId: producto.id,
+      tipo: 'ingreso',
+      usuarioId: usuarioId
+    }).subscribe({
+      next: () => {
+        this.cargarTareas();
+      },
+      error: (error) => {
+        console.error('Error al confirmar el ingreso:', error);
 
-      this.movimientoService.registrar(nuevoMovimiento).subscribe(() => {
-        this.cargarTareas(); 
-      });
+        alert(
+          error.error?.detail ||
+          'No se pudo confirmar el ingreso. Actualizá la lista e intentá nuevamente.'
+        );
+
+        this.cargarTareas();
+      }
     });
   }
 
- 
   marcarPreparado(producto: Producto): void {
-    const cantidad = producto.cantidadPendiente || 0;
-    const nuevoStock = producto.stock - cantidad;
+    const usuarioId = this.authService.usuario()?.id;
 
-    const cambioProducto: Partial<Producto> = {
-      stock: nuevoStock,
-      estado: 'almacenado',
-      cantidadPendiente: 0
-    };
+    if (!usuarioId) {
+      alert('No se pudo identificar al usuario que confirma la tarea.');
+      return;
+    }
 
-    
-    this.productoService.actualizarParcial(producto.id, cambioProducto).subscribe(() => {
+    this.movimientoService.confirmar({
+      productoId: producto.id,
+      tipo: 'preparacion',
+      usuarioId: usuarioId
+    }).subscribe({
+      next: () => {
+        this.cargarTareas();
+      },
+      error: (error) => {
+        console.error('Error al confirmar la preparación:', error);
 
-     
-      const nuevoMovimiento = {
-        productoId: producto.id,
-        tipo: 'preparacion' as const,
-        cantidad: cantidad,
-        fecha: new Date().toISOString(),
-        usuarioId: this.authService.usuario()?.id || 1
-      };
+        alert(
+          error.error?.detail ||
+          'No se pudo confirmar la preparación. Actualizá la lista e intentá nuevamente.'
+        );
 
-      this.movimientoService.registrar(nuevoMovimiento).subscribe(() => {
-        this.cargarTareas(); 
-      });
+        this.cargarTareas();
+      }
     });
   }
 }

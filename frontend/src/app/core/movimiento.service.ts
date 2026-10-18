@@ -1,11 +1,14 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Movimiento } from './models/movimiento.model';
+
+import { Movimiento, TipoMovimiento } from './models/movimiento.model';
 import { API_URL } from './api';
 
-// Acceso a la coleccion /movimientos (ingresos y preparaciones confirmados).
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class MovimientoService {
   private url = `${API_URL}/movimientos`;
 
@@ -15,8 +18,14 @@ export class MovimientoService {
     return this.http.get<Movimiento[]>(this.url);
   }
 
-  // Registra un movimiento nuevo. El id lo genera json-server.
-  registrar(movimiento: Omit<Movimiento, 'id'>): Observable<Movimiento> {
-    return this.http.post<Movimiento>(this.url, movimiento);
+  confirmar(datos: {
+    productoId: number;
+    tipo: TipoMovimiento;
+    usuarioId: number;
+  }): Observable<Movimiento> {
+    return this.http.post<Movimiento>(
+      `${this.url}/confirmar`,
+      datos
+    );
   }
 }
