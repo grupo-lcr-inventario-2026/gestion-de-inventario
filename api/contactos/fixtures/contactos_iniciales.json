@@ -1,0 +1,23 @@
+
+[
+  {
+    "model": "contactos.contacto",
+    "pk": 1,
+    "fields": {
+      "empresa": "Empresa de ejemplo",
+      "nombre": "Ana Pérez",
+      "email": "ana@ejemplo.com",
+      "mensaje": "Consulta sobre los productos y servicios."
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 2,
+    "fields": {
+      "empresa": "Comercial del Centro",
+      "nombre": "Juan López",
+      "email": "juan@ejemplo.com",
+      "mensaje": "Quisiera recibir información sobre el sistema."
+    }
+  }
+]
