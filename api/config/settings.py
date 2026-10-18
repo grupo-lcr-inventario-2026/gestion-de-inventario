@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'usuarios',
     'productos',
     'contactos',
-    
+    'movimientos',
+
     # Cada integrante agrega su app aca: 'productos', 'movimientos', 'contactos'
 ]
 
