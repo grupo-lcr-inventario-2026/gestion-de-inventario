@@ -9,5 +9,5 @@ urlpatterns = [
     path('api/v1/', include('usuarios.urls')),
     path('api/v1/', include('productos.urls')),
     path('api/v1/', include('movimientos.urls')),
-    # path('api/v1/', include('contactos.urls')),
+    path('api/v1/', include('contactos.urls')),
 ]
