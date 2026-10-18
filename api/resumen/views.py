@@ -4,21 +4,22 @@ from rest_framework import status
 
 from usuarios.models import Usuario
 from productos.models import Producto
+from movimientos.models import Movimiento
 
 
 
 class ResumenView(APIView):
-    """Calcula y devuelve los totales para la pantalla Resumen."""
 
     def get(self, request):
-        
-        empleados_activos = Usuario.objects.filter(rol='empleado', activo=True).count()
+     
+        preparados = Movimiento.objects.filter(tipo='preparacion').count()
 
-        
         pendientes = Producto.objects.exclude(estado='almacenado').count()
 
+        empleados_activos = Usuario.objects.filter(rol='empleado', activo=True).count()
+
         datos = {
-            'productosPreparados': 0,  
+            'productosPreparados': preparados,
             'productosPendientes': pendientes,
             'empleadosActivos': empleados_activos,
         }
